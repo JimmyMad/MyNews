@@ -1,17 +1,21 @@
-package com.sweethome.jimmy.mynews;
+package com.sweethome.jimmy.mynews.Views;
 
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.sweethome.jimmy.mynews.Controllers.Fragments.PageArticlesListFragment;
+
 
 public class PageAdapter extends FragmentPagerAdapter {
 
-    public PageAdapter(FragmentManager fm) {
+    public PageAdapter(FragmentManager fm, int i) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     }
 
+    @NonNull
     @Override
     public Fragment getItem(int position) {
         switch(position) {
