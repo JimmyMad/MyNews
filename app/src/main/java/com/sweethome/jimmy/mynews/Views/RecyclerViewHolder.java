@@ -32,6 +32,8 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         if(results.getMultimedia().size() != 0) {
             Glide.with(this.imageView).load(results.getMultimedia().get(0).getUrl()).into(imageView);
         }
+        else imageView.setImageResource(R.mipmap.new_york_times_default_image_article);
+
         categoryTextView.setText(results.getSection());
         titleTextView.setText(results.getTitle());
         datesTextView.setText(results.getPublishedDate());
