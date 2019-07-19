@@ -37,11 +37,14 @@ public class PageArticlesListFragment extends Fragment {
     private Disposable disposable;
     private List<Result> results;
     private RecyclerViewAdapter adapter;
+    private int position;
 
-    public PageArticlesListFragment() {}
+    public PageArticlesListFragment(int position) {
+        this.position = position;
+    }
 
-    public static PageArticlesListFragment newInstance() {
-        return (new PageArticlesListFragment());
+    public static PageArticlesListFragment newInstance(int position) {
+        return (new PageArticlesListFragment(position));
     }
 
     @Override
@@ -50,7 +53,7 @@ public class PageArticlesListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_articles_list, container, false);
         ButterKnife.bind(this, view);
         configureRecyclerView();
-        executeHttpRequest();
+        executeHttpRequest(this.position);
 
         return view;
     }
@@ -83,23 +86,37 @@ public class PageArticlesListFragment extends Fragment {
         if (disposable != null && disposable.isDisposed()) disposable.dispose();
     }
 
-    private void executeHttpRequest() {
-        disposable = NyTimesStreams.streamFetchTopStories().subscribeWith(new DisposableObserver<Article>() {
-            @Override
-            public void onNext(Article article) {
-                updateUI(article);
-            }
+    private void executeHttpRequest(int position) {
 
-            @Override
-            public void onError(Throwable e) {
+        switch (position) {
+            case 0:
+                disposable = NyTimesStreams.streamFetchTopStories().subscribeWith(new DisposableObserver<Article>() {
+                    @Override
+                    public void onNext(Article article) {
+                        updateUI(article);
+                    }
 
-            }
+                    @Override
+                    public void onError(Throwable e) {}
 
-            @Override
-            public void onComplete() {
+                    @Override
+                    public void onComplete() {}
+                });
+            case 1:
+                disposable = NyTimesStreams.streamFetchMostPopular().subscribeWith(new DisposableObserver<Article>() {
+                    @Override
+                    public void onNext(Article article) {
+                        updateUI(article);
+                    }
 
-            }
-        });
+                    @Override
+                    public void onError(Throwable e) {}
+
+                    @Override
+                    public void onComplete() {}
+                });
+        }
+
     }
 
     // -------------------

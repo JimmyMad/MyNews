@@ -20,13 +20,13 @@ public class PageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch(position) {
             case 0 :
-                return PageArticlesListFragment.newInstance();
+                return PageArticlesListFragment.newInstance(position);
             case 1 :
-                return PageArticlesListFragment.newInstance();
+                return PageArticlesListFragment.newInstance(position);
             case 2 :
-                return PageArticlesListFragment.newInstance();
+                return PageArticlesListFragment.newInstance(position);
             default :
-                return PageArticlesListFragment.newInstance();
+                return PageArticlesListFragment.newInstance(0);
         }
     }
 

@@ -11,10 +11,15 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface NyTimesService {
-    @GET("topstories/v2/home.json?api-key=vYNxoAopAjLFANQNx7dMBKZDL8isrF9t")
-    Observable<Article> getResults();
+
+    @GET("topstories/v2/home.json")
+    Observable<Article> getTopStories(@Query("api-key") String apiKeyNt);
+
+    @GET("mostpopular/v2/viewed/1.json")
+    Observable<Article> getMostPopular(@Query("apiKey") String apiKeyNt);
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/")
