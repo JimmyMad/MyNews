@@ -11,7 +11,7 @@ import com.sweethome.jimmy.mynews.Controllers.Fragments.PageArticlesListFragment
 
 public class PageAdapter extends FragmentPagerAdapter {
 
-    public PageAdapter(FragmentManager fm, int i) {
+    public PageAdapter(FragmentManager fm) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     }
 

@@ -7,7 +7,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sweethome.jimmy.mynews.Models.Article;
+import com.bumptech.glide.Glide;
 import com.sweethome.jimmy.mynews.Models.Result;
 import com.sweethome.jimmy.mynews.R;
 
@@ -29,7 +29,9 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void updateWithResults(Result results) {
-        imageView.setImageResource(R.drawable.ic_launcher_background);
+        if(results.getMultimedia().size() != 0) {
+            Glide.with(this.imageView).load(results.getMultimedia().get(0).getUrl()).into(imageView);
+        }
         categoryTextView.setText(results.getSection());
         titleTextView.setText(results.getTitle());
         datesTextView.setText(results.getPublishedDate());

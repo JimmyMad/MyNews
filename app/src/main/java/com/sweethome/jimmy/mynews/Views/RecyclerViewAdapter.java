@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sweethome.jimmy.mynews.Models.Article;
 import com.sweethome.jimmy.mynews.Models.Result;
 import com.sweethome.jimmy.mynews.R;
 
