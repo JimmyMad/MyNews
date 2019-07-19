@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-class Result {
+public class Result {
 
     @SerializedName("section")
     @Expose
@@ -57,7 +57,7 @@ class Result {
     private List<String> geoFacet = null;
     @SerializedName("multimedia")
     @Expose
-    private List<Multimedia> multimedia = null;
+    private List<Multimedium> multimedia = null;
     @SerializedName("short_url")
     @Expose
     private String shortUrl;
@@ -190,11 +190,11 @@ class Result {
         this.geoFacet = geoFacet;
     }
 
-    public List<Multimedia> getMultimedia() {
+    public List<Multimedium> getMultimedia() {
         return multimedia;
     }
 
-    public void setMultimedia(List<Multimedia> multimedia) {
+    public void setMultimedia(List<Multimedium> multimedia) {
         this.multimedia = multimedia;
     }
 

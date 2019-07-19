@@ -3,7 +3,7 @@ package com.sweethome.jimmy.mynews.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-class Multimedia {
+public class Multimedium {
 
     @SerializedName("url")
     @Expose

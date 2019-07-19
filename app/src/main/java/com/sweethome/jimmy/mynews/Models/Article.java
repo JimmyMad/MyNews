@@ -1,12 +1,14 @@
 
+//-----------------------------------com.example.Article.java-----------------------------------
 
 package com.sweethome.jimmy.mynews.Models;
+
+
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.util.List;
 
-
-public class TopStoriesHome {
+public class Article {
 
     @SerializedName("status")
     @Expose
@@ -76,4 +78,3 @@ public class TopStoriesHome {
     }
 
 }
-
