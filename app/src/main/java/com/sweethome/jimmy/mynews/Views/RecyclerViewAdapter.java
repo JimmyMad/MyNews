@@ -1,6 +1,7 @@
 package com.sweethome.jimmy.mynews.Views;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +18,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
     // FOR DATA
     private List<Result> results;
+    private int position;
 
     // CONSTRUCTOR
-    public RecyclerViewAdapter(List<Result> results) {
+    public RecyclerViewAdapter(List<Result> results, int position) {
         this.results = results;
+        this.position = position;
     }
 
 
@@ -31,7 +34,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.fragment_articles_list_item, parent, false);
-        return new RecyclerViewHolder(view);
+        return new RecyclerViewHolder(view, this.position);
     }
 
     @Override
@@ -40,7 +43,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     }
 
     @Override
-    public int getItemCount() {
-        return results.size();
-    }
+    public int getItemCount() { return results.size(); }
 }

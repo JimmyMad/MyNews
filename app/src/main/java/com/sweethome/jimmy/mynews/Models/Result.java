@@ -43,7 +43,7 @@ public class Result {
     @SerializedName("kicker")
     @Expose
     private String kicker;
-    @SerializedName("des_facet")
+    /*@SerializedName("des_facet")
     @Expose
     private List<String> desFacet = null;
     @SerializedName("org_facet")
@@ -54,7 +54,7 @@ public class Result {
     private List<String> perFacet = null;
     @SerializedName("geo_facet")
     @Expose
-    private List<String> geoFacet = null;
+    private List<String> geoFacet = null;*/
     @SerializedName("multimedia")
     @Expose
     private List<Multimedium> multimedia = null;
@@ -73,12 +73,12 @@ public class Result {
     @SerializedName("source")
     @Expose
     private String source;
-    @SerializedName("id")
+    /*@SerializedName("id")
     @Expose
     private Integer id;
     @SerializedName("asset_id")
     @Expose
-    private Integer assetId;
+    private Integer assetId;*/
     @SerializedName("views")
     @Expose
     private Integer views;
@@ -185,7 +185,7 @@ public class Result {
         this.kicker = kicker;
     }
 
-    public List<String> getDesFacet() {
+    /*public List<String> getDesFacet() {
         return desFacet;
     }
 
@@ -215,7 +215,7 @@ public class Result {
 
     public void setGeoFacet(List<String> geoFacet) {
         this.geoFacet = geoFacet;
-    }
+    }*/
 
     public List<Multimedium> getMultimedia() {
         return multimedia;
@@ -265,7 +265,7 @@ public class Result {
         this.source = source;
     }
 
-    public Integer getId() {
+    /*public Integer getId() {
         return id;
     }
 
@@ -279,7 +279,7 @@ public class Result {
 
     public void setAssetId(Integer assetId) {
         this.assetId = assetId;
-    }
+    }*/
 
     public Integer getViews() {
         return views;

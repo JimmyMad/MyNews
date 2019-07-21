@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +73,7 @@ public class PageArticlesListFragment extends Fragment {
 
     private void configureRecyclerView() {
         this.results = new ArrayList<>();
-        this.adapter = new RecyclerViewAdapter(this.results);
+        this.adapter = new RecyclerViewAdapter(this.results, this.position);
         this.recyclerView.setAdapter(this.adapter);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
@@ -110,7 +111,11 @@ public class PageArticlesListFragment extends Fragment {
                     }
 
                     @Override
-                    public void onError(Throwable e) {}
+                    public void onError(Throwable e) {
+                        String msg = e.getMessage();
+                        Log.e("Erreur pos 1", msg);
+
+                    }
 
                     @Override
                     public void onComplete() {}

@@ -19,7 +19,7 @@ public interface NyTimesService {
     Observable<Article> getTopStories(@Query("api-key") String apiKeyNt);
 
     @GET("mostpopular/v2/viewed/1.json")
-    Observable<Article> getMostPopular(@Query("apiKey") String apiKeyNt);
+    Observable<Article> getMostPopular(@Query("api-key") String apiKeyNt);
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/")
