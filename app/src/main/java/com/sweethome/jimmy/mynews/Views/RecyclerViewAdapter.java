@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sweethome.jimmy.mynews.Models.Doc;
 import com.sweethome.jimmy.mynews.Models.Result;
 import com.sweethome.jimmy.mynews.R;
 
@@ -18,12 +19,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
     // FOR DATA
     private List<Result> results;
-    private int position;
 
     // CONSTRUCTOR
-    public RecyclerViewAdapter(List<Result> results, int position) {
+    public RecyclerViewAdapter(List<Result> results) {
         this.results = results;
-        this.position = position;
     }
 
 
@@ -34,14 +33,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.fragment_articles_list_item, parent, false);
-        return new RecyclerViewHolder(view, this.position);
+        return new RecyclerViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        holder.updateWithResults(results.get(position));
+        holder.updateWithResults(results.get(position), position);
     }
 
     @Override
     public int getItemCount() { return results.size(); }
+
+    public String getArticleUrl(int position) {
+        return results.get(position).getUrl();
+    }
 }

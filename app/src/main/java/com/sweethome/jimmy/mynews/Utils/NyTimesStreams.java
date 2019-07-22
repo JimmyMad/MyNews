@@ -2,6 +2,8 @@ package com.sweethome.jimmy.mynews.Utils;
 
 
 import com.sweethome.jimmy.mynews.Models.Article;
+import com.sweethome.jimmy.mynews.Models.Doc;
+import com.sweethome.jimmy.mynews.Models.Response;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,9 +15,9 @@ public class NyTimesStreams {
 
     private static final String apiKeyNt = "vYNxoAopAjLFANQNx7dMBKZDL8isrF9t";
 
-    public static Observable<Article> streamFetchTopStories(){
+    public static Observable<Article> streamFetchTopStories(String section){
         NyTimesService nyTimesService = NyTimesService.retrofit.create(NyTimesService.class);
-        return nyTimesService.getTopStories(apiKeyNt)
+        return nyTimesService.getTopStories(section, apiKeyNt)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);
@@ -28,4 +30,12 @@ public class NyTimesStreams {
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);
     }
+
+    /*public static Observable<Response> streamFetchBusinessArticles(){
+        NyTimesService nyTimesService = NyTimesService.retrofit.create(NyTimesService.class);
+        return nyTimesService.getBusinessArticles("Business", apiKeyNt)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(10, TimeUnit.SECONDS);
+    }*/
 }

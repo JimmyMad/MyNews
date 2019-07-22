@@ -30,6 +30,22 @@ public class Multimedium {
     @Expose
     private String copyright;
 
+    @SerializedName("rank")
+    @Expose
+    private Integer rank;
+    @SerializedName("credit")
+    @Expose
+    private Object credit;
+    @SerializedName("legacy")
+    @Expose
+    private Legacy legacy;
+    @SerializedName("subType")
+    @Expose
+    private String subType;
+    @SerializedName("crop_name")
+    @Expose
+    private String cropName;
+
     public String getUrl() {
         return url;
     }

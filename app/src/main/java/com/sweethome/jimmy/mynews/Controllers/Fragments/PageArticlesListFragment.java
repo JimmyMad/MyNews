@@ -1,6 +1,7 @@
 package com.sweethome.jimmy.mynews.Controllers.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,9 +14,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sweethome.jimmy.mynews.Controllers.Activities.WebViewActivity;
 import com.sweethome.jimmy.mynews.Models.Article;
+import com.sweethome.jimmy.mynews.Models.Doc;
+import com.sweethome.jimmy.mynews.Models.Response;
 import com.sweethome.jimmy.mynews.Models.Result;
 import com.sweethome.jimmy.mynews.R;
+import com.sweethome.jimmy.mynews.Utils.ItemClickSupport;
 import com.sweethome.jimmy.mynews.Utils.NyTimesStreams;
 import com.sweethome.jimmy.mynews.Views.RecyclerViewAdapter;
 
@@ -54,6 +59,7 @@ public class PageArticlesListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_articles_list, container, false);
         ButterKnife.bind(this, view);
         configureRecyclerView();
+        configureOnClickRecyclerView();
         executeHttpRequest(this.position);
 
         return view;
@@ -73,11 +79,30 @@ public class PageArticlesListFragment extends Fragment {
 
     private void configureRecyclerView() {
         this.results = new ArrayList<>();
-        this.adapter = new RecyclerViewAdapter(this.results, this.position);
+        this.adapter = new RecyclerViewAdapter(this.results);
         this.recyclerView.setAdapter(this.adapter);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
+    // -----------------
+    // ACTION
+    // -----------------
+
+    // 1 - Configure item click on RecyclerView
+    private void configureOnClickRecyclerView(){
+        ItemClickSupport.addTo(recyclerView, R.layout.fragment_articles_list_item)
+                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                        Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                        String url = adapter.getArticleUrl(position);
+                        intent.putExtra("url", url);
+                        startActivity(intent);
+
+                        //Log.e("TAG", "Position : "+position);
+                    }
+                });
+    }
 
     // -------------------
     // HTTP (RxJAVA)
@@ -91,7 +116,7 @@ public class PageArticlesListFragment extends Fragment {
 
         switch (position) {
             case 0:
-                disposable = NyTimesStreams.streamFetchTopStories().subscribeWith(new DisposableObserver<Article>() {
+                disposable = NyTimesStreams.streamFetchTopStories("home").subscribeWith(new DisposableObserver<Article>() {
                     @Override
                     public void onNext(Article article) {
                         updateUI(article);
@@ -103,6 +128,7 @@ public class PageArticlesListFragment extends Fragment {
                     @Override
                     public void onComplete() {}
                 });
+
             case 1:
                 disposable = NyTimesStreams.streamFetchMostPopular().subscribeWith(new DisposableObserver<Article>() {
                     @Override
@@ -120,6 +146,20 @@ public class PageArticlesListFragment extends Fragment {
                     @Override
                     public void onComplete() {}
                 });
+
+            case 2:
+                disposable = NyTimesStreams.streamFetchTopStories("business").subscribeWith(new DisposableObserver<Article>() {
+                    @Override
+                    public void onNext(Article article) {
+                        updateUI(article);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {}
+
+                    @Override
+                    public void onComplete() {}
+                });
         }
 
     }
@@ -129,9 +169,7 @@ public class PageArticlesListFragment extends Fragment {
     // -------------------
 
     private void updateUI(Article article) {
-
         this.results.addAll(article.getResults());
         adapter.notifyDataSetChanged();
     }
-
 }
