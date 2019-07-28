@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">MyNews</string>
 
-    <string name="image_default_description">Image d\'article</string>
+    <string name="image_default_description">Article image</string>
+
+    <string name="parameters">Parameters</string>
+    <string name="search">Search</string>
 </resources>

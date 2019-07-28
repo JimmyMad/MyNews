@@ -5,6 +5,7 @@ import com.sweethome.jimmy.mynews.Models.Article;
 import com.sweethome.jimmy.mynews.Models.Doc;
 import com.sweethome.jimmy.mynews.Models.Response;
 
+import java.sql.Timestamp;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -31,11 +32,11 @@ public class NyTimesStreams {
                 .timeout(10, TimeUnit.SECONDS);
     }
 
-    /*public static Observable<Response> streamFetchBusinessArticles(){
+    public static Observable<Response> streamFetchSearchArticles(String query, Timestamp beginDate, Timestamp endDate, String section){
         NyTimesService nyTimesService = NyTimesService.retrofit.create(NyTimesService.class);
-        return nyTimesService.getBusinessArticles("Business", apiKeyNt)
+        return nyTimesService.getSearchArticles(query, beginDate, endDate, section, apiKeyNt)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);
-    }*/
+    }
 }

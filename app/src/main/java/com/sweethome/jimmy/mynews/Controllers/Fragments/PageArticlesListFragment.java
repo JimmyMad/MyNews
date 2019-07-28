@@ -16,8 +16,6 @@ import android.view.ViewGroup;
 
 import com.sweethome.jimmy.mynews.Controllers.Activities.WebViewActivity;
 import com.sweethome.jimmy.mynews.Models.Article;
-import com.sweethome.jimmy.mynews.Models.Doc;
-import com.sweethome.jimmy.mynews.Models.Response;
 import com.sweethome.jimmy.mynews.Models.Result;
 import com.sweethome.jimmy.mynews.R;
 import com.sweethome.jimmy.mynews.Utils.ItemClickSupport;
@@ -44,6 +42,8 @@ public class PageArticlesListFragment extends Fragment {
     private List<Result> results;
     private RecyclerViewAdapter adapter;
     private int position;
+
+    public PageArticlesListFragment() {}
 
     public PageArticlesListFragment(int position) {
         this.position = position;
@@ -98,8 +98,6 @@ public class PageArticlesListFragment extends Fragment {
                         String url = adapter.getArticleUrl(position);
                         intent.putExtra("url", url);
                         startActivity(intent);
-
-                        //Log.e("TAG", "Position : "+position);
                     }
                 });
     }

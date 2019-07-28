@@ -5,6 +5,7 @@ import com.sweethome.jimmy.mynews.Models.Doc;
 import com.sweethome.jimmy.mynews.Models.Response;
 import com.sweethome.jimmy.mynews.Models.Result;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -24,8 +25,12 @@ public interface NyTimesService {
     @GET("mostpopular/v2/viewed/1.json")
     Observable<Article> getMostPopular(@Query("api-key") String apiKeyNt);
 
-    /*@GET("search/v2/articlesearch.json")
-    Observable<Response> getBusinessArticles(@Query("news_desk")String newsDesk, @Query("api-key") String apiKeyNt);*/
+    @GET("search/v2/articlesearch.json")
+    Observable<Response> getSearchArticles(@Query("q")String query,
+                                             @Query("begin_date")Timestamp beginDate,
+                                             @Query("end_date") Timestamp endDate,
+                                             @Query("section_name.contains")String section,
+                                             @Query("api-key") String apiKeyNt);
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/")
