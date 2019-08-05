@@ -54,10 +54,9 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Il n'y a rien à paramétrer ici, passez votre chemin...", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.menu_activity_main_search:
-                Intent intent = new Intent(MainActivity.this , SearchActivity.class);
+                Intent intent = new Intent(MainActivity.this , SearchAndNotificationActivity.class);
                 intent.putExtra("title" , "Search Articles");
                 this.startActivity(intent);
-                //Toast.makeText(this, "Recherche indisponible, demandez plutôt l'avis de Google, c'est mieux et plus rapide.", Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

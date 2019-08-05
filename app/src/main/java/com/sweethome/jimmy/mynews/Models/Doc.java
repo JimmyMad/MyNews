@@ -46,6 +46,9 @@ public class Doc {
     @SerializedName("section_name")
     @Expose
     private String sectionName;
+    @SerializedName("subsection_name")
+    @Expose
+    private String subsection_name;
     @SerializedName("byline")
     @Expose
     private Byline byline;
@@ -206,4 +209,11 @@ public class Doc {
         this.uri = uri;
     }
 
+    public String getSubsection_name() {
+        return subsection_name;
+    }
+
+    public void setSubsection_name(String subsection_name) {
+        this.subsection_name = subsection_name;
+    }
 }

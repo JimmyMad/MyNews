@@ -4,133 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Controllers.Activities.SearchActivity">
+    android:orientation="vertical">
 
     <include
         layout="@layout/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 
-
-    <EditText
-        android:id="@+id/searchActivity_editText_query"
+    <FrameLayout
+        android:id="@+id/activity_search_frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:hint="Search query term"
-        android:inputType="text" />
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal">
-
-        <TableRow
-            android:id="@+id/searchActivity_dateRow"
-            android:visibility="gone">
-            <EditText
-                android:id="@+id/searchActivity_beginDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:hint="Begin Date"
-                android:inputType="none"
-                android:longClickable="false"
-                tools:ignore="TextFields"
-                android:layout_weight="1"/>
-            <EditText
-                android:id="@+id/searchActivity_endDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:hint="End Date"
-                android:inputType="none"
-                android:longClickable="false"
-                tools:ignore="TextFields"
-                android:layout_weight="1"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_marginTop="8dp">
-            <CheckBox
-                android:id="@+id/searchActivity_checkBox_arts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:layout_weight="1"/>
-            <CheckBox
-                android:id="@+id/searchActivity_checkBox_politics"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:layout_weight="1"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_marginTop="8dp">
-            <CheckBox
-                android:id="@+id/searchActivity_checkBox_business"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:layout_weight="1"/>
-            <CheckBox
-                android:id="@+id/searchActivity_checkBox_sports"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:layout_weight="1"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_marginTop="8dp">
-            <CheckBox
-                android:id="@+id/searchActivity_checkBox_entrepreneurs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:layout_weight="1"/>
-            <CheckBox
-                android:id="@+id/searchActivity_checkBox_travel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:layout_weight="1"/>
-        </TableRow>
-
-    </TableLayout>
-
-    <Button
-        android:id="@+id/searchActivity_button"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="SEARCH"
-        android:textStyle="bold"
-        android:textColor="@color/textColor"
-        android:background="@color/colorPrimary"/>
-
-    <Switch
-        android:id="@+id/searchActivity_switchNotification"
-        android:visibility="gone"
-        android:text="Enable notifications (once per day)"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        tools:context=".Controllers.Activities.SearchActivity"/>
 
 </LinearLayout>
+

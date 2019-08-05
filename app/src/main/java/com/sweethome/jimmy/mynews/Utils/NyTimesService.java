@@ -1,12 +1,7 @@
 package com.sweethome.jimmy.mynews.Utils;
 
 import com.sweethome.jimmy.mynews.Models.Article;
-import com.sweethome.jimmy.mynews.Models.Doc;
-import com.sweethome.jimmy.mynews.Models.Response;
-import com.sweethome.jimmy.mynews.Models.Result;
-
-import java.sql.Timestamp;
-import java.util.List;
+import com.sweethome.jimmy.mynews.Models.SearchArticle;
 
 
 import io.reactivex.Observable;
@@ -26,11 +21,16 @@ public interface NyTimesService {
     Observable<Article> getMostPopular(@Query("api-key") String apiKeyNt);
 
     @GET("search/v2/articlesearch.json")
-    Observable<Response> getSearchArticles(@Query("q")String query,
-                                             @Query("begin_date")Timestamp beginDate,
-                                             @Query("end_date") Timestamp endDate,
+    Observable<SearchArticle> getSearchArticles(@Query("q")String query,
+                                             @Query("begin_date")String beginDate,
+                                             @Query("end_date") String endDate,
                                              @Query("section_name.contains")String section,
                                              @Query("api-key") String apiKeyNt);
+
+    @GET("search/v2/articlesearch.json")
+    Observable<SearchArticle> getSearchArticles(@Query("q")String query,
+                                                            @Query("section_name.contains")String section,
+                                                            @Query("api-key") String apiKeyNt);
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/")

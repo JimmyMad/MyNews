@@ -1,7 +1,6 @@
 package com.sweethome.jimmy.mynews.Views;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +18,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
     // FOR DATA
     private List<Result> results;
+    private List<Doc> docs;
 
     // CONSTRUCTOR
-    public RecyclerViewAdapter(List<Result> results) {
+    public RecyclerViewAdapter(List<Result> results, List<Doc> docs) {
         this.results = results;
+        this.docs = docs;
     }
 
 
@@ -38,13 +39,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        holder.updateWithResults(results.get(position), position);
+        if (results != null)
+            holder.updateWithResults(results.get(position),  position);
+        else
+            holder.updateWithDoc(docs.get(position));
     }
 
     @Override
-    public int getItemCount() { return results.size(); }
+    public int getItemCount() {
+        if (results != null)
+            return results.size();
+        else
+            return docs.size();
+    }
 
     public String getArticleUrl(int position) {
-        return results.get(position).getUrl();
+        if (results != null)
+            return results.get(position).getUrl();
+        else
+            return docs.get(position).getWebUrl();
     }
 }

@@ -43,7 +43,8 @@ public class PageArticlesListFragment extends Fragment {
     private RecyclerViewAdapter adapter;
     private int position;
 
-    public PageArticlesListFragment() {}
+    public PageArticlesListFragment() {
+    }
 
     public PageArticlesListFragment(int position) {
         this.position = position;
@@ -79,7 +80,7 @@ public class PageArticlesListFragment extends Fragment {
 
     private void configureRecyclerView() {
         this.results = new ArrayList<>();
-        this.adapter = new RecyclerViewAdapter(this.results);
+        this.adapter = new RecyclerViewAdapter(this.results, null);
         this.recyclerView.setAdapter(this.adapter);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
@@ -89,7 +90,7 @@ public class PageArticlesListFragment extends Fragment {
     // -----------------
 
     // 1 - Configure item click on RecyclerView
-    private void configureOnClickRecyclerView(){
+    private void configureOnClickRecyclerView() {
         ItemClickSupport.addTo(recyclerView, R.layout.fragment_articles_list_item)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
@@ -121,10 +122,12 @@ public class PageArticlesListFragment extends Fragment {
                     }
 
                     @Override
-                    public void onError(Throwable e) {}
+                    public void onError(Throwable e) {
+                    }
 
                     @Override
-                    public void onComplete() {}
+                    public void onComplete() {
+                    }
                 });
 
             case 1:
@@ -142,7 +145,8 @@ public class PageArticlesListFragment extends Fragment {
                     }
 
                     @Override
-                    public void onComplete() {}
+                    public void onComplete() {
+                    }
                 });
 
             case 2:
@@ -153,10 +157,12 @@ public class PageArticlesListFragment extends Fragment {
                     }
 
                     @Override
-                    public void onError(Throwable e) {}
+                    public void onError(Throwable e) {
+                    }
 
                     @Override
-                    public void onComplete() {}
+                    public void onComplete() {
+                    }
                 });
         }
 

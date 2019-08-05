@@ -2,10 +2,8 @@ package com.sweethome.jimmy.mynews.Utils;
 
 
 import com.sweethome.jimmy.mynews.Models.Article;
-import com.sweethome.jimmy.mynews.Models.Doc;
-import com.sweethome.jimmy.mynews.Models.Response;
+import com.sweethome.jimmy.mynews.Models.SearchArticle;
 
-import java.sql.Timestamp;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -32,9 +30,17 @@ public class NyTimesStreams {
                 .timeout(10, TimeUnit.SECONDS);
     }
 
-    public static Observable<Response> streamFetchSearchArticles(String query, Timestamp beginDate, Timestamp endDate, String section){
+    public static Observable<SearchArticle> streamFetchSearchArticles(String query, String beginDate, String endDate, String section){
         NyTimesService nyTimesService = NyTimesService.retrofit.create(NyTimesService.class);
         return nyTimesService.getSearchArticles(query, beginDate, endDate, section, apiKeyNt)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(10, TimeUnit.SECONDS);
+    }
+
+    public static Observable<SearchArticle> streamFetchSearchArticles(String query, String section){
+        NyTimesService nyTimesService = NyTimesService.retrofit.create(NyTimesService.class);
+        return nyTimesService.getSearchArticles(query, section, apiKeyNt)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);

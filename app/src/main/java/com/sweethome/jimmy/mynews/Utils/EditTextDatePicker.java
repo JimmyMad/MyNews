@@ -9,7 +9,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.TimeZone;
 
 
@@ -17,7 +16,7 @@ public class EditTextDatePicker  implements View.OnClickListener, DatePickerDial
     private EditText _editText;
     private int _day;
     private int _month;
-    private int _birthYear;
+    private int _year;
     private Context _context;
 
     public EditTextDatePicker(Context context, int editTextViewID)
@@ -30,15 +29,29 @@ public class EditTextDatePicker  implements View.OnClickListener, DatePickerDial
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        _birthYear = year;
-        _month = monthOfYear;
+        _year = year;
+        _month = monthOfYear + 1;
         _day = dayOfMonth;
         updateDisplay();
     }
 
     private void updateDisplay() {
+        String year = Integer.toString(_year),
+                month = Integer.toString(_month),
+                day = Integer.toString(_day);
+
+        while (year.length() < 4) {
+            year = "0" + year;
+        }
+        if (month.length() < 2) {
+            month = "0" + month;
+        }
+        if (day.length() < 2) {
+            day = "0" + day;
+        }
+
         _editText.setText(new StringBuilder()
-                .append(_day).append("/").append(_month + 1).append("/").append(_birthYear));
+                .append(day).append("/").append(month).append("/").append(year));
     }
 
     @Override
