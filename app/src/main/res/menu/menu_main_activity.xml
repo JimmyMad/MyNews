@@ -14,5 +14,16 @@
         android:icon="@drawable/baseline_more_vert_24"
         app:showAsAction="ifRoom"
         android:title="@string/parameters">
+        <menu>
+            <item
+                android:id="@+id/menu_notification"
+                android:title="@string/notification"/>
+            <item
+                android:id="@+id/menu_help"
+                android:title="@string/help"/>
+            <item
+                android:id="@+id/menu_about"
+                android:title="@string/about"/>
+        </menu>
     </item>
 </menu>

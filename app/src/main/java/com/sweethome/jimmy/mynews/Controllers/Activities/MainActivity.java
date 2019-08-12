@@ -50,13 +50,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_activity_main_params:
+            case R.id.menu_notification:
+                Intent intentNotification = new Intent(MainActivity.this , SearchAndNotificationActivity.class);
+                intentNotification.putExtra("title" , "Notification");
+                this.startActivity(intentNotification);
+                return true;
+            case R.id.menu_help:
+                Toast.makeText(this, "Il n'y a rien à paramétrer ici, passez votre chemin...", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.menu_about:
                 Toast.makeText(this, "Il n'y a rien à paramétrer ici, passez votre chemin...", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.menu_activity_main_search:
-                Intent intent = new Intent(MainActivity.this , SearchAndNotificationActivity.class);
-                intent.putExtra("title" , "Search Articles");
-                this.startActivity(intent);
+                Intent intentSearch = new Intent(MainActivity.this , SearchAndNotificationActivity.class);
+                intentSearch.putExtra("title" , "Search Articles");
+                this.startActivity(intentSearch);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

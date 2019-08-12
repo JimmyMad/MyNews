@@ -12,6 +12,10 @@
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <!-- Color of the title text in the Toolbar -->
         <item name="android:textColorPrimary">@color/textColor</item>
+        <!-- set background color -->
+        <item name="android:colorBackground">@color/textColor</item>
+        <!-- set text color -->
+        <item name="android:textColor">@color/textColorBlack</item>
     </style>
 
     <!-- TOOLBAR TITLE THEME -->
