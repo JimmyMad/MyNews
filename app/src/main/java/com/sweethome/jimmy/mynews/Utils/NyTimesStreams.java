@@ -1,9 +1,12 @@
 package com.sweethome.jimmy.mynews.Utils;
 
 
+import android.os.Process;
+
 import com.sweethome.jimmy.mynews.Models.Article;
 import com.sweethome.jimmy.mynews.Models.SearchArticle;
 
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;

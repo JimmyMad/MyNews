@@ -8,7 +8,7 @@ public class Meta {
 
     @SerializedName("hits")
     @Expose
-    private Integer hits;
+    private int hits;
     @SerializedName("offset")
     @Expose
     private Integer offset;
@@ -16,7 +16,7 @@ public class Meta {
     @Expose
     private Integer time;
 
-    public Integer getHits() {
+    public int getHits() {
         return hits;
     }
 
