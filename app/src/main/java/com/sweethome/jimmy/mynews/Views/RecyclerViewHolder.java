@@ -57,6 +57,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         categoryTextView.setText(cat);
         titleTextView.setText(result.getTitle());
 
+        // TODO better date format
         String dateBeforeFormat = result.getPublishedDate().substring(0, 10);
         String[] dates = dateBeforeFormat.split("-");
         String date = dates[2] + "/" + dates[1] + "/" + dates[0];
@@ -84,6 +85,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
         categoryTextView.setText(cat);
         titleTextView.setText(doc.getHeadline().getMain());
+        // TODO better date format
         String dateBeforeFormat = doc.getPubDate().substring(0, 10);
         String[] dates = dateBeforeFormat.split("-");
         String date = dates[2] + "/" + dates[1] + "/" + dates[0];

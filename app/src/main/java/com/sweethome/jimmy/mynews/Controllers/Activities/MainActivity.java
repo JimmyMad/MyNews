@@ -57,10 +57,12 @@ public class MainActivity extends AppCompatActivity {
                 this.startActivity(intentNotification);
                 return true;
             case R.id.menu_help:
-                Toast.makeText(this, "Il n'y a rien à paramétrer ici, passez votre chemin...", Toast.LENGTH_LONG).show();
+                Intent intentHelp = new Intent(MainActivity.this , HelpActivity.class);
+                this.startActivity(intentHelp);
                 return true;
             case R.id.menu_about:
-                Toast.makeText(this, "Il n'y a rien à paramétrer ici, passez votre chemin...", Toast.LENGTH_LONG).show();
+                Intent intentAbout = new Intent(MainActivity.this , AboutActivity.class);
+                this.startActivity(intentAbout);
                 return true;
             case R.id.menu_activity_main_search:
                 Intent intentSearch = new Intent(MainActivity.this , SearchAndNotificationActivity.class);

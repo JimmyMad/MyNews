@@ -14,12 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Controllers.Activities.SearchActivity"
+        <activity android:name=".Controllers.Activities.HelpActivity"></activity>
+        <activity android:name=".Controllers.Activities.AboutActivity" />
+        <activity
+            android:name=".Controllers.Activities.SearchActivity"
             android:label="Search result"
             android:parentActivityName=".Controllers.Activities.SearchAndNotificationActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Controllers.Activities.SearchAndNotificationActivity"/>
+                android:value=".Controllers.Activities.SearchAndNotificationActivity" />
         </activity>
         <activity
             android:name=".Controllers.Activities.SearchAndNotificationActivity"
@@ -49,9 +52,7 @@
         <receiver
             android:name=".Utils.MyBroadCastReceiver"
             android:enabled="true"
-            android:exported="true"/>
-
+            android:exported="true" />
     </application>
-
 
 </manifest>
