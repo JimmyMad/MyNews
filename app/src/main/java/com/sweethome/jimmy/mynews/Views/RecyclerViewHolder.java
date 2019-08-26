@@ -14,6 +14,10 @@ import com.sweethome.jimmy.mynews.Models.Result;
 import com.sweethome.jimmy.mynews.R;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -57,11 +61,10 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         categoryTextView.setText(cat);
         titleTextView.setText(result.getTitle());
 
-        // TODO better date format
-        String dateBeforeFormat = result.getPublishedDate().substring(0, 10);
-        String[] dates = dateBeforeFormat.split("-");
-        String date = dates[2] + "/" + dates[1] + "/" + dates[0];
-        datesTextView.setText(date);
+        Date date = result.getPublishedDate();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String strDate = formatter.format(date);
+        datesTextView.setText(strDate);
     }
 
     public void updateWithDoc(Doc doc) {
@@ -85,10 +88,10 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
         categoryTextView.setText(cat);
         titleTextView.setText(doc.getHeadline().getMain());
-        // TODO better date format
-        String dateBeforeFormat = doc.getPubDate().substring(0, 10);
-        String[] dates = dateBeforeFormat.split("-");
-        String date = dates[2] + "/" + dates[1] + "/" + dates[0];
-        datesTextView.setText(date);
+
+        Date date = doc.getPubDate();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String strDate = formatter.format(date);
+        datesTextView.setText(strDate);
     }
 }

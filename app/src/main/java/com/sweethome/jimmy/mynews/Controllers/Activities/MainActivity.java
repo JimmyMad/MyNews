@@ -1,22 +1,23 @@
 package com.sweethome.jimmy.mynews.Controllers.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager.widget.ViewPager;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.sweethome.jimmy.mynews.Views.PageAdapter;
 import com.sweethome.jimmy.mynews.R;
+import com.sweethome.jimmy.mynews.Views.PageAdapter;
 
 public class MainActivity extends AppCompatActivity {
+
+    public PagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void configureViewPagerAndTabs() {
         ViewPager pager = findViewById(R.id.activity_main_viewpager);
-        pager.setAdapter(new PageAdapter(getSupportFragmentManager()));
+        pagerAdapter = new PageAdapter(getSupportFragmentManager());
+        pager.setAdapter(pagerAdapter);
 
         TabLayout tabs = findViewById(R.id.activity_main_tabs);
         tabs.setupWithViewPager(pager);

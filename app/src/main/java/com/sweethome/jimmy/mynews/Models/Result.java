@@ -3,6 +3,7 @@ package com.sweethome.jimmy.mynews.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
 import java.util.List;
 
 public class Result {
@@ -30,13 +31,13 @@ public class Result {
     private String itemType;
     @SerializedName("updated_date")
     @Expose
-    private String updatedDate;
+    private Date updatedDate;
     @SerializedName("created_date")
     @Expose
-    private String createdDate;
+    private Date createdDate;
     @SerializedName("published_date")
     @Expose
-    private String publishedDate;
+    private Date publishedDate;
     @SerializedName("material_type_facet")
     @Expose
     private String materialTypeFacet;
@@ -145,27 +146,27 @@ public class Result {
         this.itemType = itemType;
     }
 
-    public String getUpdatedDate() {
+    public Date getUpdatedDate() {
         return updatedDate;
     }
 
-    public void setUpdatedDate(String updatedDate) {
+    public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
     }
 
-    public String getCreatedDate() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
-    public String getPublishedDate() {
+    public Date getPublishedDate() {
         return publishedDate;
     }
 
-    public void setPublishedDate(String publishedDate) {
+    public void setPublishedDate(Date publishedDate) {
         this.publishedDate = publishedDate;
     }
 

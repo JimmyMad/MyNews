@@ -1,6 +1,7 @@
 
 package com.sweethome.jimmy.mynews.Models;
 
+import java.util.Date;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -36,7 +37,7 @@ public class Doc {
     private List<Keyword> keywords = null;
     @SerializedName("pub_date")
     @Expose
-    private String pubDate;
+    private Date pubDate;
     @SerializedName("document_type")
     @Expose
     private String documentType;
@@ -137,11 +138,11 @@ public class Doc {
         this.keywords = keywords;
     }
 
-    public String getPubDate() {
+    public Date getPubDate() {
         return pubDate;
     }
 
-    public void setPubDate(String pubDate) {
+    public void setPubDate(Date pubDate) {
         this.pubDate = pubDate;
     }
 
