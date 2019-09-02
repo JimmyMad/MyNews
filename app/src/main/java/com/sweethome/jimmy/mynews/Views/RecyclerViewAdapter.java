@@ -19,11 +19,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     // FOR DATA
     private List<Result> results;
     private List<Doc> docs;
+    private int position;
 
     // CONSTRUCTOR
-    public RecyclerViewAdapter(List<Result> results, List<Doc> docs) {
+    public RecyclerViewAdapter(List<Result> results, List<Doc> docs, int position) {
         this.results = results;
         this.docs = docs;
+        this.position = position;
     }
 
 
@@ -40,7 +42,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         if (results != null)
-            holder.updateWithResults(results.get(position),  position);
+            holder.updateWithResults(results.get(position),  this.position);
         else
             holder.updateWithDoc(docs.get(position));
     }

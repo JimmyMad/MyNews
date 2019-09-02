@@ -78,7 +78,7 @@ public class PageArticlesListFragment extends Fragment {
 
     private void configureRecyclerView() {
         this.results = new ArrayList<>();
-        this.adapter = new RecyclerViewAdapter(this.results, null);
+        this.adapter = new RecyclerViewAdapter(this.results, null, this.position);
         this.recyclerView.setAdapter(this.adapter);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
