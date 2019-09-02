@@ -49,14 +49,14 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         String cat = result.getSection();
 
 
-        if (result.getOrgFacet().size() >= 1)
+        /*if (result.getOrgFacet().size() >= 1)
             cat += " > " + result.getOrgFacet().get(0);
         else if (result.getPerFacet().size() >= 1)
             cat += " > " + result.getPerFacet().get(0);
         else if (result.getGeoFacet().size() >= 1)
             cat += " > " + result.getGeoFacet().get(0);
         else if (result.getDesFacet().size() >= 1)
-            cat += " > " + result.getDesFacet().get(0);
+            cat += " > " + result.getDesFacet().get(0);*/
 
         categoryTextView.setText(cat);
         titleTextView.setText(result.getTitle());

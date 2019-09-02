@@ -3,16 +3,15 @@ package com.sweethome.jimmy.mynews.Controllers.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.sweethome.jimmy.mynews.Controllers.Activities.WebViewActivity;
 import com.sweethome.jimmy.mynews.Models.Article;
@@ -27,7 +26,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
@@ -129,7 +127,7 @@ public class PageArticlesListFragment extends Fragment {
                     public void onComplete() {
                     }
                 });
-
+                break;
             case 1:
                 disposable = NyTimesStreams.streamFetchMostPopular().subscribeWith(new DisposableObserver<Article>() {
                     @Override
@@ -148,7 +146,7 @@ public class PageArticlesListFragment extends Fragment {
                     public void onComplete() {
                     }
                 });
-
+                break;
             case 2:
                 disposable = NyTimesStreams.streamFetchTopStories("business").subscribeWith(new DisposableObserver<Article>() {
                     @Override
@@ -164,6 +162,7 @@ public class PageArticlesListFragment extends Fragment {
                     public void onComplete() {
                     }
                 });
+                break;
         }
 
     }

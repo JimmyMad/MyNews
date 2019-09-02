@@ -1,28 +1,25 @@
 package com.sweethome.jimmy.mynews.Controllers.Activities;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TableRow;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.sweethome.jimmy.mynews.Models.Response;
 import com.sweethome.jimmy.mynews.Models.SearchArticle;
 import com.sweethome.jimmy.mynews.R;
@@ -30,15 +27,12 @@ import com.sweethome.jimmy.mynews.Utils.EditTextDatePicker;
 import com.sweethome.jimmy.mynews.Utils.MyBroadCastReceiver;
 import com.sweethome.jimmy.mynews.Utils.NyTimesStreams;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
@@ -79,7 +73,7 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
 
     private AlarmManager alarmManager;
     private PendingIntent pendingIntent;
-    Calendar calendar = Calendar.getInstance();
+    private Calendar calendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +103,7 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
     }
 
     @Override
-    public void onDestroy() {
+    protected void onDestroy() {
         super.onDestroy();
         this.disposeWhenDestroy();
     }
@@ -140,7 +134,7 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
             calendar.set(Calendar.MINUTE, 0);
             calendar.set(Calendar.SECOND, 0);
             calendar.set(Calendar.MILLISECOND, 0);
-            //calendar.add(Calendar.DAY_OF_YEAR, 1);
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
 
             alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             Intent alarmIntent = new Intent(this, MyBroadCastReceiver.class);
@@ -287,6 +281,7 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
 
     private void startAlarm() {
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY , pendingIntent);
+        Toast.makeText(getApplicationContext(), "Alarm Activated", Toast.LENGTH_LONG).show();
     }
 
     private void cancelAlarm() {

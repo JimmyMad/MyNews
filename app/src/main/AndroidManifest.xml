@@ -14,8 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Controllers.Activities.HelpActivity"></activity>
-        <activity android:name=".Controllers.Activities.AboutActivity" />
+        <activity android:name=".Controllers.Activities.HelpActivity">
+            android:parentActivityName=".Controllers.Activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Controllers.Activities.MainActivity" />
+        </activity>
+        <activity android:name=".Controllers.Activities.AboutActivity">
+        android:parentActivityName=".Controllers.Activities.MainActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".Controllers.Activities.MainActivity" />
+        </activity>
         <activity
             android:name=".Controllers.Activities.SearchActivity"
             android:label="Search result"

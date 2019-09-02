@@ -25,4 +25,6 @@
     <string name="about">About</string>
     <string name="channel_name">default</string>
     <string name="channel_description">default channel</string>
+    <string name="aboutText">MyNews regroups all the articles that may interest you in some determined categories.\n\nYou can receive notification on specifics articles if you enable the notification option in the notification screen.</string>
+    <string name="helpText">You can touch articles to open them in a browser.\n\nIn the search screen you can search articles with specific terms or periods, dates are optional.\n\nIn the notification screen you can enable MyNews to send you a notification every day so you don\'t miss out any articles that interest you.</string>
 </resources>

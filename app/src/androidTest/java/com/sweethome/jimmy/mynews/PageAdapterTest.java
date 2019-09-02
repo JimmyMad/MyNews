@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class PageAdapterTest {
 
@@ -34,6 +35,7 @@ public class PageAdapterTest {
         assertEquals("TOP STORIES", Objects.requireNonNull(mActivity.pagerAdapter.getPageTitle(0)));
         assertEquals("MOST POPULAR", Objects.requireNonNull(mActivity.pagerAdapter.getPageTitle(1)));
         assertEquals("BUSINESS", Objects.requireNonNull(mActivity.pagerAdapter.getPageTitle(2)));
+        assertNull(mActivity.pagerAdapter.getPageTitle(3));
     }
 
 }
