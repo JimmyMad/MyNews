@@ -36,17 +36,8 @@ public class PageSearchArticlesFragment extends Fragment {
     // DATA
     private List<Doc> docs;
     private RecyclerViewAdapter adapter;
-    private int position;
 
     public PageSearchArticlesFragment() {}
-
-    public PageSearchArticlesFragment(int position) {
-        this.position = position;
-    }
-
-    public static PageSearchArticlesFragment newInstance(int position) {
-        return (new PageSearchArticlesFragment(position));
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -73,7 +64,7 @@ public class PageSearchArticlesFragment extends Fragment {
 
     private void configureRecyclerView() {
         this.docs = new ArrayList<>();
-        this.adapter = new RecyclerViewAdapter(null, this.docs, this.position);
+        this.adapter = new RecyclerViewAdapter(null, this.docs, 4);
         this.recyclerView.setAdapter(this.adapter);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }

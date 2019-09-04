@@ -42,9 +42,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         if (results != null)
-            holder.updateWithResults(results.get(position),  this.position);
+            holder.updateWithResults(results.get(position), null,  this.position);
         else
-            holder.updateWithDoc(docs.get(position));
+            holder.updateWithResults(null, docs.get(position), 0);
     }
 
     @Override

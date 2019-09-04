@@ -34,19 +34,20 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void updateWithResults(Result result, int position) {
-        if (position == 1) {
-            if (result.getMedia() != null && result.getMedia().size() >= 1) {
-                Glide.with(this.imageView).load(result.getMedia().get(0).getMediaMetadata().get(0).getUrl()).into(imageView);
-            } else
-                imageView.setImageResource(R.mipmap.new_york_times_default_image_article);
-        } else {
-            if (result.getMultimedia() != null && result.getMultimedia().size() >= 1) {
-                Glide.with(this.imageView).load(result.getMultimedia().get(0).getUrl()).into(imageView);
-            } else
-                imageView.setImageResource(R.mipmap.new_york_times_default_image_article);
-        }
-        String cat = result.getSection();
+    public void updateWithResults(Result result, Doc doc, int position) {
+        if (result != null) {
+            if (position == 1) {
+                if (result.getMedia() != null && result.getMedia().size() >= 1) {
+                    Glide.with(this.imageView).load(result.getMedia().get(0).getMediaMetadata().get(0).getUrl()).into(imageView);
+                } else
+                    imageView.setImageResource(R.mipmap.new_york_times_default_image_article);
+            } else {
+                if (result.getMultimedia() != null && result.getMultimedia().size() >= 1) {
+                    Glide.with(this.imageView).load(result.getMultimedia().get(0).getUrl()).into(imageView);
+                } else
+                    imageView.setImageResource(R.mipmap.new_york_times_default_image_article);
+            }
+            String cat = result.getSection();
 
 
         /*if (result.getOrgFacet().size() >= 1)
@@ -58,40 +59,39 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         else if (result.getDesFacet().size() >= 1)
             cat += " > " + result.getDesFacet().get(0);*/
 
-        categoryTextView.setText(cat);
-        titleTextView.setText(result.getTitle());
+            categoryTextView.setText(cat);
+            titleTextView.setText(result.getTitle());
 
-        Date date = result.getPublishedDate();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        String strDate = formatter.format(date);
-        datesTextView.setText(strDate);
-    }
+            Date date = result.getPublishedDate();
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            String strDate = formatter.format(date);
+            datesTextView.setText(strDate);
 
-    public void updateWithDoc(Doc doc) {
-        if (doc.getMultimedia().size() >= 17+1) {
+        }
+        if (doc != null) {
+            if (doc.getMultimedia().size() >= 17 + 1) {
                 Glide.with(this.imageView).load("https://static01.nyt.com/" + doc.getMultimedia().get(17).getUrl()).into(imageView);
-            } else
-                if (doc.getMultimedia().size() >= 1) {
-                    Glide.with(this.imageView).load("https://static01.nyt.com/" + doc.getMultimedia().get(1).getUrl()).into(imageView);
-                }
-                else {
-                    imageView.setImageResource(R.mipmap.new_york_times_default_image_article);
-                }
+            } else if (doc.getMultimedia().size() >= 1) {
+                Glide.with(this.imageView).load("https://static01.nyt.com/" + doc.getMultimedia().get(1).getUrl()).into(imageView);
+            } else {
+                imageView.setImageResource(R.mipmap.new_york_times_default_image_article);
+            }
 
-        String cat = doc.getSectionName();
+            String cat = doc.getSectionName();
 
 
-        if (doc.getSubsection_name() != null)
-            cat += " > " + doc.getSubsection_name();
-        else if (doc.getNewsDesk() != null)
-            cat += " > " + doc.getNewsDesk();
+            if (doc.getSubsection_name() != null)
+                cat += " > " + doc.getSubsection_name();
+            else if (doc.getNewsDesk() != null)
+                cat += " > " + doc.getNewsDesk();
 
-        categoryTextView.setText(cat);
-        titleTextView.setText(doc.getHeadline().getMain());
+            categoryTextView.setText(cat);
+            titleTextView.setText(doc.getHeadline().getMain());
 
-        Date date = doc.getPubDate();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        String strDate = formatter.format(date);
-        datesTextView.setText(strDate);
+            Date date = doc.getPubDate();
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            String strDate = formatter.format(date);
+            datesTextView.setText(strDate);
+        }
     }
 }
