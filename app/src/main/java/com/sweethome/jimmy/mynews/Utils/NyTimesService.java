@@ -1,6 +1,7 @@
 package com.sweethome.jimmy.mynews.Utils;
 
 import com.sweethome.jimmy.mynews.Models.Article;
+import com.sweethome.jimmy.mynews.Models.ArticleMostPopular;
 import com.sweethome.jimmy.mynews.Models.SearchArticle;
 
 
@@ -18,7 +19,7 @@ public interface NyTimesService {
     Observable<Article> getTopStories(@Path("section") String section, @Query("api-key") String apiKeyNt);
 
     @GET("mostpopular/v2/viewed/1.json")
-    Observable<Article> getMostPopular(@Query("api-key") String apiKeyNt);
+    Observable<ArticleMostPopular> getMostPopular(@Query("api-key") String apiKeyNt);
 
     @GET("search/v2/articlesearch.json")
     Observable<SearchArticle> getSearchArticles(@Query("q")String query,

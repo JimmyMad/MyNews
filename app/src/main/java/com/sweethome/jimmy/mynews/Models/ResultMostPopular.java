@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 import java.util.List;
 
-public class Result {
+public class ResultMostPopular {
 
     @SerializedName("section")
     @Expose
@@ -43,7 +43,8 @@ public class Result {
     private String materialTypeFacet;
     @SerializedName("kicker")
     @Expose
-    private String kicker;@SerializedName("des_facet")
+    private String kicker;
+    /*@SerializedName("des_facet")
     @Expose
     private List<String> desFacet = null;
     @SerializedName("org_facet")
@@ -54,7 +55,7 @@ public class Result {
     private List<String> perFacet = null;
     @SerializedName("geo_facet")
     @Expose
-    private List<String> geoFacet = null;
+    private List<String> geoFacet = null;*/
     @SerializedName("multimedia")
     @Expose
     private List<Multimedium> multimedia = null;
@@ -185,7 +186,7 @@ public class Result {
         this.kicker = kicker;
     }
 
-    public List<String> getDesFacet() {
+    /*public List<String> getDesFacet() {
         return desFacet;
     }
 
@@ -215,7 +216,7 @@ public class Result {
 
     public void setGeoFacet(List<String> geoFacet) {
         this.geoFacet = geoFacet;
-    }
+    }*/
 
     public List<Multimedium> getMultimedia() {
         return multimedia;

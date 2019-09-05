@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sweethome.jimmy.mynews.Controllers.Activities.WebViewActivity;
 import com.sweethome.jimmy.mynews.Models.Article;
+import com.sweethome.jimmy.mynews.Models.ArticleMostPopular;
 import com.sweethome.jimmy.mynews.Models.Result;
+import com.sweethome.jimmy.mynews.Models.ResultMostPopular;
 import com.sweethome.jimmy.mynews.R;
 import com.sweethome.jimmy.mynews.Utils.ItemClickSupport;
 import com.sweethome.jimmy.mynews.Utils.NyTimesStreams;
@@ -38,6 +40,7 @@ public class PageArticlesListFragment extends Fragment {
     // DATA
     private Disposable disposable;
     private List<Result> results;
+    private List<ResultMostPopular> resultMostPopulars;
     private RecyclerViewAdapter adapter;
     private int position;
 
@@ -78,7 +81,8 @@ public class PageArticlesListFragment extends Fragment {
 
     private void configureRecyclerView() {
         this.results = new ArrayList<>();
-        this.adapter = new RecyclerViewAdapter(this.results, null, this.position);
+        this.resultMostPopulars = new ArrayList<>();
+        this.adapter = new RecyclerViewAdapter(this.results, this.resultMostPopulars, null, this.position);
         this.recyclerView.setAdapter(this.adapter);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
@@ -116,7 +120,7 @@ public class PageArticlesListFragment extends Fragment {
                 disposable = NyTimesStreams.streamFetchTopStories("home").subscribeWith(new DisposableObserver<Article>() {
                     @Override
                     public void onNext(Article article) {
-                        updateUI(article);
+                        updateUI(article, null);
                     }
 
                     @Override
@@ -129,10 +133,10 @@ public class PageArticlesListFragment extends Fragment {
                 });
                 break;
             case 1:
-                disposable = NyTimesStreams.streamFetchMostPopular().subscribeWith(new DisposableObserver<Article>() {
+                disposable = NyTimesStreams.streamFetchMostPopular().subscribeWith(new DisposableObserver<ArticleMostPopular>() {
                     @Override
-                    public void onNext(Article article) {
-                        updateUI(article);
+                    public void onNext(ArticleMostPopular articleMostPopular) {
+                        updateUI(null, articleMostPopular);
                     }
 
                     @Override
@@ -151,7 +155,7 @@ public class PageArticlesListFragment extends Fragment {
                 disposable = NyTimesStreams.streamFetchTopStories("business").subscribeWith(new DisposableObserver<Article>() {
                     @Override
                     public void onNext(Article article) {
-                        updateUI(article);
+                        updateUI(article, null);
                     }
 
                     @Override
@@ -171,8 +175,11 @@ public class PageArticlesListFragment extends Fragment {
     // UPDATE UI
     // -------------------
 
-    private void updateUI(Article article) {
-        this.results.addAll(article.getResults());
+    private void updateUI(Article article, ArticleMostPopular articleMostPopular) {
+        if (article != null)
+            this.results.addAll(article.getResults());
+        else
+            this.resultMostPopulars.addAll(articleMostPopular.getResultMostPopulars());
         adapter.notifyDataSetChanged();
     }
 }

@@ -64,7 +64,7 @@ public class PageSearchArticlesFragment extends Fragment {
 
     private void configureRecyclerView() {
         this.docs = new ArrayList<>();
-        this.adapter = new RecyclerViewAdapter(null, this.docs, 4);
+        this.adapter = new RecyclerViewAdapter(null, null, this.docs, 4);
         this.recyclerView.setAdapter(this.adapter);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }

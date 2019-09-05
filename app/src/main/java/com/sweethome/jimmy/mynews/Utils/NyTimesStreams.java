@@ -2,6 +2,7 @@ package com.sweethome.jimmy.mynews.Utils;
 
 
 import com.sweethome.jimmy.mynews.Models.Article;
+import com.sweethome.jimmy.mynews.Models.ArticleMostPopular;
 import com.sweethome.jimmy.mynews.Models.SearchArticle;
 
 import java.util.concurrent.TimeUnit;
@@ -22,7 +23,7 @@ public class NyTimesStreams {
                 .timeout(10, TimeUnit.SECONDS);
     }
 
-    public static Observable<Article> streamFetchMostPopular(){
+    public static Observable<ArticleMostPopular> streamFetchMostPopular(){
         NyTimesService nyTimesService = NyTimesService.retrofit.create(NyTimesService.class);
         return nyTimesService.getMostPopular(apiKeyNt)
                 .subscribeOn(Schedulers.io())
