@@ -60,7 +60,7 @@
         </activity>
 
         <receiver
-            android:name=".Utils.MyBroadCastReceiver"
+            android:name=".Utils.BroadCastReceiver"
             android:enabled="true"
             android:exported="true"/>
     </application>

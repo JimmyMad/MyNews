@@ -24,7 +24,7 @@ import com.sweethome.jimmy.mynews.Models.Response;
 import com.sweethome.jimmy.mynews.Models.SearchArticle;
 import com.sweethome.jimmy.mynews.R;
 import com.sweethome.jimmy.mynews.Utils.EditTextDatePicker;
-import com.sweethome.jimmy.mynews.Utils.MyBroadCastReceiver;
+import com.sweethome.jimmy.mynews.Utils.BroadCastReceiver;
 import com.sweethome.jimmy.mynews.Utils.NyTimesStreams;
 
 import java.util.ArrayList;
@@ -35,6 +35,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
+
+import static com.sweethome.jimmy.mynews.Utils.Tools.dateSearchFormatter;
 
 public class SearchAndNotificationActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -137,7 +139,7 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
             calendar.add(Calendar.DAY_OF_YEAR, 1);
 
             alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            Intent alarmIntent = new Intent(this, MyBroadCastReceiver.class);
+            Intent alarmIntent = new Intent(this, BroadCastReceiver.class);
             pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
             switchNotification.setVisibility(View.VISIBLE);
             this.setTitle("Notification");
@@ -199,13 +201,8 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
                             }
                         });
                     } else {
-                        // format date dd/MM/YYYY to YYYYMMdd
-                        String beginDate = "";
-                        String endDate = "";
-                        String[] beginDateTab = editTextBeginDate.getText().toString().split("/");
-                        String[] endDateTab = editTextEndDate.getText().toString().split("/");
-                        beginDate = beginDate + beginDateTab[2] + beginDateTab[1] + beginDateTab[0];
-                        endDate = endDate + endDateTab[2] + endDateTab[1] + endDateTab[0];
+                        String beginDate = dateSearchFormatter(editTextBeginDate.getText().toString());
+                        String endDate = dateSearchFormatter(editTextEndDate.getText().toString());
 
                         disposable = NyTimesStreams.streamFetchSearchArticles(editTextQuery.getText().toString(), beginDate, endDate, checkBoxesSearchQuery).subscribeWith(new DisposableObserver<SearchArticle>() {
                             @Override
@@ -225,7 +222,7 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
                         });
                     }
                 } else
-                    Toast.makeText(this, "Need query and at least 1 box", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Need query and at least one box checked", Toast.LENGTH_LONG).show();
             case R.id.searchActivity_switchNotification:
                 if (switchNotification.isChecked()) {
                     if (!editTextQuery.getText().toString().equals("") && checkBoxesChecked >= 1) {
@@ -264,11 +261,13 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
             Intent intent = new Intent(this, SearchActivity.class);
             intent.putExtra("ARTICLES_SEARCH", json);
             startActivity(intent);
-        } else Toast.makeText(this, "No result found with this query", Toast.LENGTH_LONG).show();
+        } else
+            Toast.makeText(this, "No result found with this query", Toast.LENGTH_LONG).show();
     }
 
     private void disposeWhenDestroy() {
-        if (disposable != null && disposable.isDisposed()) disposable.dispose();
+        if (disposable != null && disposable.isDisposed())
+            disposable.dispose();
     }
 
     private void savePrefsNotification() {

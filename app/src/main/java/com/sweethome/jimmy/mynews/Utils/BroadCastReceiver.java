@@ -19,9 +19,7 @@ import com.sweethome.jimmy.mynews.R;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
-
-public class MyBroadCastReceiver extends BroadcastReceiver {
+public class BroadCastReceiver extends BroadcastReceiver {
 
 
     private static final String CHANNEL_ID = "0" ;
@@ -32,8 +30,6 @@ public class MyBroadCastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         this.context = context;
         SharedPreferences sharedPrefs = context.getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
-        Log.e(TAG, sharedPrefs.getString("query", ""));
-        Log.e(TAG, sharedPrefs.getString("categories", ""));
 
         DisposableObserver<SearchArticle> disposableObserver = new DisposableObserver<SearchArticle>() {
             @Override
@@ -41,7 +37,6 @@ public class MyBroadCastReceiver extends BroadcastReceiver {
                 hit = searchArticle.getResponse().getMeta().getHits();
                 createNotificationChannel();
                 createNotification();
-                Log.e(TAG, "je suis passé par la");
             }
 
             @Override
@@ -52,13 +47,10 @@ public class MyBroadCastReceiver extends BroadcastReceiver {
 
             @Override
             public void onComplete() {
-                Log.e("Erreur 2 :", "On complete");
+
             }
         };
         Disposable disposable = NyTimesStreams.streamFetchSearchArticles(sharedPrefs.getString("query", ""), sharedPrefs.getString("categories", "")).subscribeWith(disposableObserver);
-
-        Log.e(TAG, String.valueOf(hit));
-
     }
 
     private void createNotification() {
