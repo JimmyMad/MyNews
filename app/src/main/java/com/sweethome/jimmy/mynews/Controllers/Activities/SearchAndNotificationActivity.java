@@ -23,8 +23,8 @@ import com.google.gson.Gson;
 import com.sweethome.jimmy.mynews.Models.Response;
 import com.sweethome.jimmy.mynews.Models.SearchArticle;
 import com.sweethome.jimmy.mynews.R;
-import com.sweethome.jimmy.mynews.Utils.EditTextDatePicker;
 import com.sweethome.jimmy.mynews.Utils.BroadCastReceiver;
+import com.sweethome.jimmy.mynews.Utils.EditTextDatePicker;
 import com.sweethome.jimmy.mynews.Utils.NyTimesStreams;
 
 import java.util.ArrayList;
@@ -250,7 +250,8 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
             case R.id.searchActivity_checkBox_travel:
                 checkBoxesIsChecked[5] = checkBoxTravel.isChecked();
         }
-        savePrefsNotification();
+        if (this.getTitle().equals("Notification"))
+            savePrefsNotification();
     }
 
     private void newActivityIfMatches(SearchArticle searchArticle) {
@@ -280,11 +281,15 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
 
     private void startAlarm() {
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY , pendingIntent);
-        Toast.makeText(getApplicationContext(), "Alarm Activated", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Notification Activated", Toast.LENGTH_LONG).show();
     }
 
     private void cancelAlarm() {
         alarmManager.cancel(pendingIntent);
-        Toast.makeText(getApplicationContext(), "Alarm Cancelled", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Notification Cancelled", Toast.LENGTH_LONG).show();
+    }
+
+    public ArrayList<CheckBox> getCheckBoxes() {
+        return checkBoxes;
     }
 }

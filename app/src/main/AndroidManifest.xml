@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sweethome.jimmy.mynews">
 
@@ -14,43 +15,43 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Controllers.Activities.HelpActivity"
+        <activity android:name="com.sweethome.jimmy.mynews.Controllers.Activities.HelpActivity"
             android:parentActivityName=".Controllers.Activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Controllers.Activities.MainActivity" />
+                android:value="com.sweethome.jimmy.mynews.Controllers.Activities.MainActivity" />
         </activity>
-        <activity android:name=".Controllers.Activities.AboutActivity"
-        android:parentActivityName=".Controllers.Activities.MainActivity">
+        <activity android:name="com.sweethome.jimmy.mynews.Controllers.Activities.AboutActivity"
+        android:parentActivityName="com.sweethome.jimmy.mynews.Controllers.Activities.MainActivity">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value=".Controllers.Activities.MainActivity" />
+            android:value="com.sweethome.jimmy.mynews.Controllers.Activities.MainActivity" />
         </activity>
         <activity
-            android:name=".Controllers.Activities.SearchActivity"
-            android:label="Search result"
-            android:parentActivityName=".Controllers.Activities.SearchAndNotificationActivity">
+            android:name="com.sweethome.jimmy.mynews.Controllers.Activities.SearchAndNotificationActivity"
+            android:parentActivityName="com.sweethome.jimmy.mynews.Controllers.Activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Controllers.Activities.SearchAndNotificationActivity" />
+                android:value="com.sweethome.jimmy.mynews.Controllers.Activities.MainActivity" />
         </activity>
         <activity
-            android:name=".Controllers.Activities.SearchAndNotificationActivity"
-            android:parentActivityName=".Controllers.Activities.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Controllers.Activities.MainActivity" />
-        </activity>
+        android:name="com.sweethome.jimmy.mynews.Controllers.Activities.SearchActivity"
+        android:label="Search result"
+        android:parentActivityName="com.sweethome.jimmy.mynews.Controllers.Activities.SearchAndNotificationActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.sweethome.jimmy.mynews.Controllers.Activities.SearchAndNotificationActivity" />
+    </activity>
         <activity
-            android:name=".Controllers.Activities.WebViewActivity"
+            android:name="com.sweethome.jimmy.mynews.Controllers.Activities.WebViewActivity"
             android:label="Return to MyNews"
-            android:parentActivityName=".Controllers.Activities.MainActivity">
+            android:parentActivityName="com.sweethome.jimmy.mynews.Controllers.Activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Controllers.Activities.MainActivity" />
+                android:value="com.sweethome.jimmy.mynews.Controllers.Activities.MainActivity" />
         </activity>
         <activity
-            android:name=".Controllers.Activities.MainActivity"
+            android:name="com.sweethome.jimmy.mynews.Controllers.Activities.MainActivity"
             android:label="MyNews">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

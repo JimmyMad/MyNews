@@ -59,7 +59,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
             } else
                 imageView.setImageResource(R.mipmap.new_york_times_default_image_article);
 
-            String cat = "Most Popular > " + resultMostPopular.getSection();
+            String cat = resultMostPopular.getSection();
 
             categoryTextView.setText(cat);
             titleTextView.setText(resultMostPopular.getTitle());
