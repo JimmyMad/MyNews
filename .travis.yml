@@ -75,7 +75,7 @@ install:
 before_script:
   - chmod +x gradlew
   - sdkmanager "system-images;android-"$EMULATOR_API";google_apis"
-  - echo no | avdmanager -v create avd -f -n test -k "system-images;android-"$EMULATOR_API";google_apis"
+  - echo no | avdmanager -v create avd -f -n test -k "system-images;android-28;default;x86"
   - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
 
