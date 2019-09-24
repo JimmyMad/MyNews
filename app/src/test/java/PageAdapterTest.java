@@ -10,7 +10,7 @@ import org.mockito.Mockito;
 public class PageAdapterTest {
 
     private FragmentManager fragmentManager = Mockito.mock(FragmentManager.class);
-    private PageAdapter pageAdapter = new PageAdapter(fragmentManager);
+    private PageAdapter pageAdapter = new PageAdapter(fragmentManager, null);
 
     @Test
     public void getItemTest() {
