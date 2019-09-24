@@ -20,6 +20,7 @@
     <string name="searchButton">SEARCH</string>
     <string name="enable_notificationsSwitch">Enable notifications (once per day)</string>
     <string name="ErrorNotEnoughInformation">Need query and at least one box checked</string>
+    <string name="ErrorDatesIncorrect">You may have selected wrong dates or the begin date is after the end date</string>
     <string name="NoResultFound">No result found with this query</string>
     <string name="NotificationActivated">Notification Activated</string>
     <string name="NotificationCancelled">Notification Cancelled</string>

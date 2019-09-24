@@ -26,9 +26,12 @@ import com.sweethome.jimmy.mynews.Utils.BroadCastReceiver;
 import com.sweethome.jimmy.mynews.Utils.EditTextDatePicker;
 import com.sweethome.jimmy.mynews.Utils.NyTimesStreams;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -86,8 +89,8 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
 
         this.configureToolbar();
         ButterKnife.bind(this);
-        EditTextDatePicker editTextDatePickerBeginDate = new EditTextDatePicker(SearchAndNotificationActivity.this, editTextBeginDate.getId());
-        EditTextDatePicker editTextDatePickerEndDate = new EditTextDatePicker(SearchAndNotificationActivity.this, editTextEndDate.getId());
+        EditTextDatePicker editTextDatePickerBeginDate = new EditTextDatePicker(this, editTextBeginDate.getId());
+        EditTextDatePicker editTextDatePickerEndDate = new EditTextDatePicker(this, editTextEndDate.getId());
         checkBoxes.addAll(Arrays.asList(checkBoxArts, checkBoxPolitics, checkBoxBusiness, checkBoxSports, checkBoxEntrepreneurs, checkBoxTravel));
 
         checkBoxArts.setOnClickListener(this);
@@ -196,26 +199,39 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
                             }
                         });
                     } else {
-                        String beginDate = dateSearchFormatter(editTextBeginDate.getText().toString());
-                        String endDate = dateSearchFormatter(editTextEndDate.getText().toString());
+                        String beginDateS = dateSearchFormatter(editTextBeginDate.getText().toString());
+                        String endDateS = dateSearchFormatter(editTextEndDate.getText().toString());
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        Date beginDate = null;
+                        Date endDate = null;
+                        try {
+                            beginDate = dateFormat.parse(beginDateS);
+                            endDate = dateFormat.parse(endDateS);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        // Checks if the begin date isn't after end date
+                        if (endDate != null && beginDate != null && beginDate.getTime() <= endDate.getTime()) {
+                            // Request with the dates
+                            disposable = NyTimesStreams.streamFetchSearchArticles(editTextQuery.getText().toString(), beginDateS, endDateS, checkBoxesSearchQuery).subscribeWith(new DisposableObserver<SearchArticle>() {
+                                @Override
+                                public void onNext(SearchArticle searchArticle) {
+                                    newActivityIfMatches(searchArticle);
+                                }
 
-                        // Request with the dates
-                        disposable = NyTimesStreams.streamFetchSearchArticles(editTextQuery.getText().toString(), beginDate, endDate, checkBoxesSearchQuery).subscribeWith(new DisposableObserver<SearchArticle>() {
-                            @Override
-                            public void onNext(SearchArticle searchArticle) {
-                                newActivityIfMatches(searchArticle);
-                            }
+                                @Override
+                                public void onError(Throwable e) {
+                                }
 
-                            @Override
-                            public void onError(Throwable e) {
-                            }
-
-                            @Override
-                            public void onComplete() {
-                            }
-                        });
+                                @Override
+                                public void onComplete() {
+                                }
+                            });
+                        } else {
+                            Toast.makeText(this, R.string.ErrorDatesIncorrect, Toast.LENGTH_LONG).show();
+                        }
                     }
-                } else
+                    } else
                     Toast.makeText(this, R.string.ErrorNotEnoughInformation, Toast.LENGTH_LONG).show();
             case R.id.searchActivity_switchNotification:
                 if (switchNotification.isChecked()) {
