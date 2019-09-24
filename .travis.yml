@@ -74,7 +74,6 @@ install:
   - sdkmanager --list || true
 
 before_script:
-  - android list targets
   - chmod +x gradlew
   - sdkmanager "system-images;android-"$EMULATOR_API";google_apis;armeabi-v7a"
   - echo no | avdmanager -v create avd -f -n test -k "system-images;android-"$EMULATOR_API";google_apis;armeabi-v7a"
