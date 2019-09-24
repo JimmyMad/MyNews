@@ -13,10 +13,8 @@ cache:
     - $HOME/.android/build-cache
 
 env:
-  matrix:
-    - EMULATOR_API=28
-
   global:
+    - EMULATOR_API=28
     - ANDROID_API=29
     - ANDROID_BUILD_TOOLS=29.0.2
     - ADB_INSTALL_TIMEOUT=5
