@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Build;
-import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -41,8 +40,6 @@ public class BroadCastReceiver extends BroadcastReceiver {
 
             @Override
             public void onError(Throwable e) {
-                String msg = e.getMessage();
-                Log.e("Erreur 1 :", msg);
             }
 
             @Override
@@ -54,14 +51,14 @@ public class BroadCastReceiver extends BroadcastReceiver {
     }
 
     private void createNotification() {
-        String text = "No article found with your demand.";
+        String text = context.getString(R.string.NotificationNoResult);
         if (hit >= 1)
-            text = "We found " + hit + " article(s) matching your demand.";
+            text = context.getString(R.string.NotificationResultFound1) + hit + context.getString(R.string.NotificationResultFound2);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this.context, CHANNEL_ID)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),R.mipmap.new_york_times_default_image_article))
                 .setSmallIcon(R.drawable.nyt_16)
-                .setContentTitle("MyNews")
+                .setContentTitle(context.getString(R.string.app_name))
                 .setContentText(text)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 

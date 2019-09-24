@@ -1,4 +1,3 @@
-
 package com.sweethome.jimmy.mynews.Models;
 
 import com.google.gson.annotations.Expose;

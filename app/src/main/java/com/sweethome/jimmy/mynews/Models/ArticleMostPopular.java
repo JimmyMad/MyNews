@@ -1,6 +1,3 @@
-
-//-----------------------------------com.example.Article.java-----------------------------------
-
 package com.sweethome.jimmy.mynews.Models;
 
 

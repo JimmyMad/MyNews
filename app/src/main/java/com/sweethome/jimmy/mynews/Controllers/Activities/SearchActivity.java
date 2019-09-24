@@ -1,10 +1,10 @@
 package com.sweethome.jimmy.mynews.Controllers.Activities;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import android.os.Bundle;
 
 import com.sweethome.jimmy.mynews.Controllers.Fragments.PageSearchArticlesFragment;
 import com.sweethome.jimmy.mynews.R;
@@ -27,6 +27,7 @@ public class SearchActivity extends AppCompatActivity {
             .commit();
     }
 
+    // Toolbar
     private void configureToolbar(){
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

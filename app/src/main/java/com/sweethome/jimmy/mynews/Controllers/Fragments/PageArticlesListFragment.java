@@ -3,7 +3,6 @@ package com.sweethome.jimmy.mynews.Controllers.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,11 +32,9 @@ import io.reactivex.observers.DisposableObserver;
 
 public class PageArticlesListFragment extends Fragment {
 
-    // DESIGN
     @BindView(R.id.fragment_article_page_recyclerView)
     RecyclerView recyclerView;
 
-    // DATA
     private Disposable disposable;
     private List<Result> results;
     private List<ResultMostPopular> resultMostPopulars;
@@ -75,10 +72,6 @@ public class PageArticlesListFragment extends Fragment {
     }
 
 
-    // -----------------
-    // CONFIGURATION
-    // -----------------
-
     private void configureRecyclerView() {
         this.results = new ArrayList<>();
         this.resultMostPopulars = new ArrayList<>();
@@ -86,10 +79,6 @@ public class PageArticlesListFragment extends Fragment {
         this.recyclerView.setAdapter(this.adapter);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
-
-    // -----------------
-    // ACTION
-    // -----------------
 
     // 1 - Configure item click on RecyclerView
     private void configureOnClickRecyclerView() {
@@ -105,14 +94,11 @@ public class PageArticlesListFragment extends Fragment {
                 });
     }
 
-    // -------------------
-    // HTTP (RxJAVA)
-    // -------------------
-
     private void disposeWhenDestroy() {
         if (disposable != null && disposable.isDisposed()) disposable.dispose();
     }
 
+    // Execute the request for each of the 3 tabs
     private void executeHttpRequest(int position) {
 
         switch (position) {
@@ -141,9 +127,6 @@ public class PageArticlesListFragment extends Fragment {
 
                     @Override
                     public void onError(Throwable e) {
-                        String msg = e.getMessage();
-                        Log.e("Erreur pos 1", msg);
-
                     }
 
                     @Override
@@ -171,10 +154,7 @@ public class PageArticlesListFragment extends Fragment {
 
     }
 
-    // -------------------
-    // UPDATE UI
-    // -------------------
-
+    // Updates the UI with the articles
     private void updateUI(Article article, ArticleMostPopular articleMostPopular) {
         if (article != null)
             this.results.addAll(article.getResults());

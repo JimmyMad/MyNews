@@ -27,9 +27,10 @@ public class MainActivity extends AppCompatActivity {
         this.configureViewPagerAndTabs();
     }
 
+    // View pager
     private void configureViewPagerAndTabs() {
         ViewPager pager = findViewById(R.id.activity_main_viewpager);
-        pagerAdapter = new PageAdapter(getSupportFragmentManager());
+        pagerAdapter = new PageAdapter(getSupportFragmentManager(), this.getApplicationContext());
         pager.setAdapter(pagerAdapter);
 
         TabLayout tabs = findViewById(R.id.activity_main_tabs);
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
+    // Menu
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

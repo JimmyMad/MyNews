@@ -1,18 +1,25 @@
 package com.sweethome.jimmy.mynews.Views;
 
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.sweethome.jimmy.mynews.Controllers.Fragments.PageArticlesListFragment;
+import com.sweethome.jimmy.mynews.R;
+
 
 
 public class PageAdapter extends FragmentPagerAdapter {
 
-    public PageAdapter(FragmentManager fm) {
+    private Context context;
+
+    public PageAdapter(FragmentManager fm, Context context) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        this.context = context;
     }
 
     @NonNull
@@ -39,11 +46,11 @@ public class PageAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position){
         switch(position){
             case 0 :
-                return "TOP STORIES";
+                return context.getString(R.string.TabTitleTopStories);
             case 1 :
-                return "MOST POPULAR";
+                return context.getString(R.string.TabTitleMostPopular);
             case 2 :
-                return "BUSINESS";
+                return context.getString(R.string.TabTitleBusiness);
             default :
                 return null;
         }

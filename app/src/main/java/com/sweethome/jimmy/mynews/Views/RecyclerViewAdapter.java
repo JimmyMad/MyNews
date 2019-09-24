@@ -17,13 +17,15 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
-    // FOR DATA
+    // List of TopStories / Business etc... articles
     private List<Result> results;
+    // List of MostPopular articles
     private List<ResultMostPopular> resultMostPopulars;
+    // List of Searched articles
     private List<Doc> docs;
+    // The tab position (0 = TopStories, 1 = MostPopular, 2 = Business)
     private int position;
 
-    // CONSTRUCTOR
     public RecyclerViewAdapter(List<Result> results, List<ResultMostPopular> resultMostPopulars, List<Doc> docs, int position) {
         this.results = results;
         this.resultMostPopulars = resultMostPopulars;
@@ -66,6 +68,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
             return docs.size();
     }
 
+    // Gets the url to load the WebView
     public String getArticleUrl(int position) {
         if (results != null || resultMostPopulars != null) {
             if (this.position == 1)

@@ -28,12 +28,9 @@ import butterknife.ButterKnife;
 
 public class PageSearchArticlesFragment extends Fragment {
 
-
-    // DESIGN
     @BindView(R.id.fragment_search_page_recyclerView)
     RecyclerView recyclerView;
 
-    // DATA
     private List<Doc> docs;
     private RecyclerViewAdapter adapter;
 
@@ -57,21 +54,12 @@ public class PageSearchArticlesFragment extends Fragment {
         super.onDestroy();
     }
 
-
-    // -----------------
-    // CONFIGURATION
-    // -----------------
-
     private void configureRecyclerView() {
         this.docs = new ArrayList<>();
         this.adapter = new RecyclerViewAdapter(null, null, this.docs, 4);
         this.recyclerView.setAdapter(this.adapter);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
-
-    // -----------------
-    // ACTION
-    // -----------------
 
     // 1 - Configure item click on RecyclerView
     private void configureOnClickRecyclerView(){
@@ -87,10 +75,7 @@ public class PageSearchArticlesFragment extends Fragment {
                 });
     }
 
-    // -------------------
-    // UPDATE UI
-    // -------------------
-
+    // Updates the UI with the articles sent in a json
     private void updateUI() {
         Gson gson = new Gson();
         String json = getArguments().getString("ARTICLES_SEARCH");

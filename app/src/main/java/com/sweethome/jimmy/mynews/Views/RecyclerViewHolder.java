@@ -30,6 +30,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
+    // Fills the recyclerView with the articles
     public void updateWithResults(Result result, ResultMostPopular resultMostPopular, Doc doc) {
 
         if (result != null) {

@@ -1,7 +1,5 @@
 language: android
-jdk:
-  - oraclejdk8
-
+jdk: oraclejdk8
 sudo: required
 
 before_cache:
@@ -16,27 +14,26 @@ cache:
 
 env:
   matrix:
-    - EMULATOR_API=19  ANDROID_EMULATOR_IMAGE=sys-img-armeabi-v7a-android-28
+    - EMULATOR_API=28
 
   global:
     - ANDROID_API=29
-    - ANDROID_BUILD_TOOLS=29.0.0
+    - ANDROID_BUILD_TOOLS=29.0.2
     - ADB_INSTALL_TIMEOUT=5
 
 android:
   components:
     - tools
     - platform-tools
+    - tools
     - build-tools-$ANDROID_BUILD_TOOLS
     - android-$ANDROID_API
     - android-$EMULATOR_API
-
     - extra-android-support
     - extra-google-m2repository
     - extra-android-m2repository
     - extra-google-google_play_services
     - addon-google_apis-google-19
-    - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API
     - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API
 
 
@@ -47,6 +44,7 @@ licenses:
 
 # Emulator Management: Create, Start and Wait
 before_install:
+  - yes | sdkmanager "cmake;3.6.4111459"
   - mkdir "$ANDROID_HOME/licenses" || true
   - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
   - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
@@ -76,15 +74,15 @@ install:
   - sdkmanager --list || true
 
 before_script:
+  - android list targets
   - chmod +x gradlew
-
   - sdkmanager "system-images;android-"$EMULATOR_API";google_apis;armeabi-v7a"
   - echo no | avdmanager -v create avd -f -n test -k "system-images;android-"$EMULATOR_API";google_apis;armeabi-v7a"
   - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
-  - adb shell input keyevent 82 &
 
 script:
+  - adb shell input keyevent 82
   - ./gradlew test
   - while sleep 9m; do echo "=====[ $SECONDS seconds still running ]====="; done &
   - ./gradlew connectedAndroidTest

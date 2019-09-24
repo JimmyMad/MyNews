@@ -7,7 +7,7 @@
     <string name="parameters">Parameters</string>
     <string name="search">Search</string>
 
-    <!-- Search activity -->
+    <!-- Search / Notification activity -->
     <string name="editTextQuery">Search query term</string>
     <string name="begin_date">Begin Date</string>
     <string name="end_date">End Date</string>
@@ -19,12 +19,36 @@
     <string name="politics">Politics</string>
     <string name="searchButton">SEARCH</string>
     <string name="enable_notificationsSwitch">Enable notifications (once per day)</string>
+    <string name="ErrorNotEnoughInformation">Need query and at least one box checked</string>
+    <string name="NoResultFound">No result found with this query</string>
+    <string name="NotificationActivated">Notification Activated</string>
+    <string name="NotificationCancelled">Notification Cancelled</string>
 
+    <!-- Menu -->
     <string name="notification">Notification</string>
     <string name="help">Help</string>
     <string name="about">About</string>
+
     <string name="channel_name">default</string>
     <string name="channel_description">default channel</string>
-    <string name="aboutText">MyNews regroups all the articles that may interest you in some determined categories.\n\nYou can receive notification on specifics articles if you enable the notification option in the notification screen.</string>
-    <string name="helpText">You can touch articles to open them in a browser.\n\nIn the search screen you can search articles with specific terms or periods, dates are optional.\n\nIn the notification screen you can enable MyNews to send you a notification every day so you don\'t miss out any articles that interest you.</string>
+
+    <!-- Help / About Activity -->
+    <string name="aboutText">MyNews regroups all the articles that may interest you in some
+        determined categories.\n\nYou can receive notification on specifics articles if you enable
+        the notification option in the notification screen.</string>
+    <string name="helpText">You can touch articles to open them in a browser.\n\nIn the search
+        screen you can search articles with specific terms or periods, dates are optional.\n\nIn
+        the notification screen you can enable MyNews to send you a notification every day so you
+        don\'t miss out any articles that interest you.</string>
+
+    <!-- Notification -->
+    <string name="NotificationNoResult">No article found with your demand.</string>
+    <string name="NotificationResultFound1">We found </string>
+    <string name="NotificationResultFound2"> article(s) matching your demand.</string>
+
+    <!-- PageAdapter Tab Title -->
+    <string name="TabTitleTopStories">TOP STORIES</string>
+    <string name="TabTitleMostPopular">MOST POPULAR</string>
+    <string name="TabTitleBusiness">BUSINESS</string>
+
 </resources>

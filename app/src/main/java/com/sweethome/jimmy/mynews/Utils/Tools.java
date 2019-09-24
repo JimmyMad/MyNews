@@ -14,7 +14,6 @@ public class Tools {
 
     // Format date string dd/MM/YYYY to YYYYMMdd
     public static String dateSearchFormatter(String dateString) {
-        String result = "";
         String[] stringTab = dateString.split("/");
         return stringTab[2] + stringTab[1] + stringTab[0];
     }

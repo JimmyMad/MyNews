@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -117,6 +116,7 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
             savePrefsNotification();
     }
 
+    //Toolbar
     private void configureToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -126,12 +126,14 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
         }
     }
 
+    // Setting up content for either the search or the notification
     private void setVisibleViews() {
         if (activityType == null || activityType.equals("Search Articles")) {
             tableRowDate.setVisibility(View.VISIBLE);
             buttonSearch.setVisibility(View.VISIBLE);
             this.setTitle("Search Articles");
         } else {
+            // Some set up for the alarm notification
             calendar.set(Calendar.HOUR_OF_DAY, 0);
             calendar.set(Calendar.MINUTE, 0);
             calendar.set(Calendar.SECOND, 0);
@@ -141,12 +143,14 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
             alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             Intent alarmIntent = new Intent(this, BroadCastReceiver.class);
             pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
+
             switchNotification.setVisibility(View.VISIBLE);
             this.setTitle("Notification");
             setNotificationFromPreferences();
         }
     }
 
+    // Retrieving data from preferences
     private void setNotificationFromPreferences() {
         if (sharedPref.getBoolean("notificationSwitch", false)) {
             switchNotification.setChecked(true);
@@ -167,23 +171,16 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
 
     @Override
     public void onClick(View view) {
-        int checkBoxesChecked = 0;
-        int i = 0;
-        checkBoxesSearchQuery= "";
-        for (CheckBox checkB : checkBoxes) {
-            if (this.getTitle().equals("Notification")) {
-                checkBoxesIsChecked[i] = checkB.isChecked();
-                i++;
-            }
-            if (checkB.isChecked()) {
-                checkBoxesChecked++;
-                checkBoxesSearchQuery += checkB.getText().toString() + "+";
-            }
-        }
+        // Counter for number of checkBoxes checked
+        int checkBoxesCheckedCount = 0;
+        checkBoxesCheckedCount = checkBoxesCheckedCount(checkBoxesCheckedCount);
         switch (view.getId()) {
             case R.id.searchActivity_button:
-                if (!editTextQuery.getText().toString().equals("") && checkBoxesChecked >= 1) {
+                // Check if we have a query and at least 1 checkBoxe checked
+                if (!editTextQuery.getText().toString().equals("") && checkBoxesCheckedCount >= 1) {
+                    // Check if we have dates for the request
                     if (editTextBeginDate.getText().toString().equals("") || editTextEndDate.getText().toString().equals("")) {
+                        // Request without the dates
                         disposable = NyTimesStreams.streamFetchSearchArticles(editTextQuery.getText().toString(), checkBoxesSearchQuery).subscribeWith(new DisposableObserver<SearchArticle>() {
                             @Override
                             public void onNext(SearchArticle searchArticle) {
@@ -192,8 +189,6 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
 
                             @Override
                             public void onError(Throwable e) {
-                                String msg = e.getMessage();
-                                Log.e("Erreur 1 :", msg);
                             }
 
                             @Override
@@ -204,6 +199,7 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
                         String beginDate = dateSearchFormatter(editTextBeginDate.getText().toString());
                         String endDate = dateSearchFormatter(editTextEndDate.getText().toString());
 
+                        // Request with the dates
                         disposable = NyTimesStreams.streamFetchSearchArticles(editTextQuery.getText().toString(), beginDate, endDate, checkBoxesSearchQuery).subscribeWith(new DisposableObserver<SearchArticle>() {
                             @Override
                             public void onNext(SearchArticle searchArticle) {
@@ -212,8 +208,6 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
 
                             @Override
                             public void onError(Throwable e) {
-                                String msg = e.getMessage();
-                                Log.e("Erreur 2 :", msg);
                             }
 
                             @Override
@@ -222,15 +216,16 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
                         });
                     }
                 } else
-                    Toast.makeText(this, "Need query and at least one box checked", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, R.string.ErrorNotEnoughInformation, Toast.LENGTH_LONG).show();
             case R.id.searchActivity_switchNotification:
                 if (switchNotification.isChecked()) {
-                    if (!editTextQuery.getText().toString().equals("") && checkBoxesChecked >= 1) {
+                    // Check if have a query and at least 1 checkBox checked for notification
+                    if (!editTextQuery.getText().toString().equals("") && checkBoxesCheckedCount >= 1) {
                         if (this.getTitle().equals("Notification"))
                             startAlarm();
                     } else {
                         switchNotification.setChecked(false);
-                        Toast.makeText(this, "Need query and at least 1 box", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, R.string.ErrorNotEnoughInformation, Toast.LENGTH_LONG).show();
                     }
                 } else {
                     if (this.getTitle().equals("Notification"))
@@ -254,6 +249,7 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
             savePrefsNotification();
     }
 
+    // If the request finds articles, we start a new activity to show them
     private void newActivityIfMatches(SearchArticle searchArticle) {
         if (searchArticle.getResponse().getMeta().getHits() >= 1) {
             Response response = searchArticle.getResponse();
@@ -263,7 +259,7 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
             intent.putExtra("ARTICLES_SEARCH", json);
             startActivity(intent);
         } else
-            Toast.makeText(this, "No result found with this query", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.NoResultFound, Toast.LENGTH_LONG).show();
     }
 
     private void disposeWhenDestroy() {
@@ -271,6 +267,7 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
             disposable.dispose();
     }
 
+    // Saves the preferences for the notification
     private void savePrefsNotification() {
         sharedPref.edit().putString("query", editTextQuery.getText().toString()).apply();
         String jsonCheckBBoolTab = gson.toJson(checkBoxesIsChecked);
@@ -279,17 +276,32 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
         sharedPref.edit().putBoolean("notificationSwitch", switchNotification.isChecked()).apply();
     }
 
+    // Starts the alarm for the notification
     private void startAlarm() {
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY , pendingIntent);
-        Toast.makeText(getApplicationContext(), "Notification Activated", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), R.string.NotificationActivated, Toast.LENGTH_LONG).show();
     }
 
+    // Cancels the alarm for the notification
     private void cancelAlarm() {
         alarmManager.cancel(pendingIntent);
-        Toast.makeText(getApplicationContext(), "Notification Cancelled", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), R.string.NotificationCancelled, Toast.LENGTH_LONG).show();
     }
 
-    public ArrayList<CheckBox> getCheckBoxes() {
-        return checkBoxes;
+    // Count how many checkBoxes are checked and provide a string for the request
+    public int checkBoxesCheckedCount(int checkBoxesCheckedCount) {
+        int i = 0;
+        checkBoxesSearchQuery= "";
+        for (CheckBox checkB : checkBoxes) {
+            if (this.getTitle().equals("Notification")) {
+                checkBoxesIsChecked[i] = checkB.isChecked();
+                i++;
+            }
+            if (checkB.isChecked()) {
+                checkBoxesCheckedCount++;
+                checkBoxesSearchQuery += checkB.getText().toString() + "+";
+            }
+        }
+        return checkBoxesCheckedCount;
     }
 }
