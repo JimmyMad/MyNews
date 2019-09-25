@@ -21,7 +21,7 @@ public class PageAdapterTest {
     public ActivityTestRule<MainActivity> mainActivityActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Before
-    public void setUp() throws Throwable {
+    public void setUp() {
         mActivity = mainActivityActivityTestRule.getActivity();
     }
 
@@ -34,9 +34,9 @@ public class PageAdapterTest {
     // Test to see if the 3 tabs are correctly named
     @Test
     public void titles_areCorrect() {
-        assertEquals("TOP STORIES", Objects.requireNonNull(mActivity.pagerAdapter.getPageTitle(0)));
-        assertEquals("MOST POPULAR", Objects.requireNonNull(mActivity.pagerAdapter.getPageTitle(1)));
-        assertEquals("BUSINESS", Objects.requireNonNull(mActivity.pagerAdapter.getPageTitle(2)));
+        assertEquals(mActivity.getString(R.string.TabTitleTopStories), Objects.requireNonNull(mActivity.pagerAdapter.getPageTitle(0)));
+        assertEquals(mActivity.getString(R.string.TabTitleMostPopular), Objects.requireNonNull(mActivity.pagerAdapter.getPageTitle(1)));
+        assertEquals(mActivity.getString(R.string.TabTitleBusiness), Objects.requireNonNull(mActivity.pagerAdapter.getPageTitle(2)));
         assertNull(mActivity.pagerAdapter.getPageTitle(3));
     }
 

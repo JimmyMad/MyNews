@@ -179,7 +179,7 @@ public class SearchAndNotificationActivity extends AppCompatActivity implements 
         checkBoxesCheckedCount = checkBoxesCheckedCount(checkBoxesCheckedCount);
         switch (view.getId()) {
             case R.id.searchActivity_button:
-                // Check if we have a query and at least 1 checkBoxe checked
+                // Check if we have a query and at least 1 checkBox checked
                 if (!editTextQuery.getText().toString().equals("") && checkBoxesCheckedCount >= 1) {
                     // Check if we have dates for the request
                     if (editTextBeginDate.getText().toString().equals("") || editTextEndDate.getText().toString().equals("")) {

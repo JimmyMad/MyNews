@@ -9,7 +9,7 @@ public class ArticleTest {
 
     //Test Article
     @Test
-    public void articleGetTest() throws Exception{
+    public void articleGetTest() {
         Article article = new Article();
         article.setStatus("ok");
         article.setCopyright("authorization");

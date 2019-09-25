@@ -5,7 +5,6 @@ import com.sweethome.jimmy.mynews.Models.ArticleMostPopular;
 import com.sweethome.jimmy.mynews.Models.SearchArticle;
 
 import io.reactivex.Observable;
-import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -17,9 +16,6 @@ public interface NyTimesService {
 
     @GET("topstories/v2/{section}.json")
     Observable<Article> getTopStories(@Path("section") String section, @Query("api-key") String apiKeyNt);
-
-    @GET("topstories/v2/{section}.json")
-    Call<Article> getTopStoriesTest(@Path("section") String section, @Query("api-key") String apiKeyNt);
 
     @GET("mostpopular/v2/viewed/1.json")
     Observable<ArticleMostPopular> getMostPopular(@Query("api-key") String apiKeyNt);
