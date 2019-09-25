@@ -36,7 +36,7 @@ public class MainActivityTest {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void mainActivityTest() {
+    public void mainActivityTest() throws InterruptedException {
         ViewInteraction tabView = onView(
                 allOf(withContentDescription("TOP STORIES"),
                         childAtPosition(
@@ -67,6 +67,7 @@ public class MainActivityTest {
                         isDisplayed()));
         tabView3.perform(click());
 
+        Thread.sleep(5000);
         ViewInteraction linearLayout = onView(
                 allOf(childAtPosition(
                         allOf(withId(R.id.fragment_article_page_recyclerView),
