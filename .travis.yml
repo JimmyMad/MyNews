@@ -17,7 +17,7 @@ cache:
 
 env:
   matrix:
-    - EMULATOR_API_LEVEL=28  ANDROID_EMULATOR_IMAGE=sys-img-armeabi-v7a-android-28
+    - EMULATOR_API_LEVEL=28 ABI="google_apis;x86_64"
     #  - EMULATOR_API_LEVEL=23  ANDROID_EMULATOR_IMAGE=sys-img-armeabi-v7a-android-23
     #  - EMULATOR_API_LEVEL=22  ANDROID_EMULATOR_IMAGE=sys-img-armeabi-v7a-android-22
     #  - EMULATOR_API_LEVEL=21  ANDROID_EMULATOR_IMAGE=sys-img-armeabi-v7a-android-21
@@ -46,7 +46,7 @@ android:
     - extra-google-google_play_services
 
     # Specify the needed emulator
-    - $ANDROID_EMULATOR_IMAGE
+    #- $ANDROID_EMULATOR_IMAGE
 
 licenses:
   - 'android-sdk-license-.+'
@@ -80,11 +80,13 @@ install:
 before_script:
   - chmod +x gradlew
   # Create and start the emulator
-  - sdkmanager "system-images;android-"$EMULATOR_API_LEVEL";google_apis;armeabi-v7a"
-  - echo no | avdmanager -v create avd -f -n test -k "system-images;android-"$EMULATOR_API_LEVEL";google_apis;armeabi-v7a"
-  - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
 
-  - sleep 300
+  #- sdkmanager "system-images;android-"$EMULATOR_API_LEVEL";google_apis;armeabi-v7a"
+  #- echo no | avdmanager -v create avd -f -n test -k "system-images;android-"$EMULATOR_API_LEVEL";google_apis;armeabi-v7a"
+  - sdkmanager "system-images;android-$SYS;$ABI"
+  - echo no | avdmanager create avd -n test -k "system-images;android-$SYS;$ABI"
+
+  - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
 
   # Turn off animations
   #- adb shell settings put global window_animation_scale 0 &
