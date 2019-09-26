@@ -1,10 +1,21 @@
 package com.sweethome.jimmy.mynews.Controllers.Activities;
 
+import com.sweethome.jimmy.mynews.Models.Article;
+import com.sweethome.jimmy.mynews.Models.ArticleMostPopular;
+import com.sweethome.jimmy.mynews.Models.SearchArticle;
+import com.sweethome.jimmy.mynews.Utils.NyTimesStreams;
+
+import org.junit.Test;
+
+import io.reactivex.Observable;
+import io.reactivex.observers.TestObserver;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 public class NyTimesServiceTest {
 
-    // Tests of the 3 requests to load the tabs
-
-    /*@Test
+    @Test
     public void httpRequestTopStoriesTest() {
 
         Observable<Article> observableArticles = NyTimesStreams.streamFetchTopStories("home");
@@ -51,5 +62,5 @@ public class NyTimesServiceTest {
 
         assertEquals("OK", article.getStatus());
         assertNotNull(article.getResponse().getDocs());
-    }*/
+    }
 }

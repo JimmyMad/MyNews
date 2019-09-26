@@ -1,8 +1,21 @@
 package com.sweethome.jimmy.mynews;
 
+import androidx.test.rule.ActivityTestRule;
+
+import com.sweethome.jimmy.mynews.Controllers.Activities.MainActivity;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+
+import java.util.Objects;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 public class PageAdapterTest {
 
-    /*private MainActivity mActivity;
+    private MainActivity mActivity;
 
     @Rule
     public ActivityTestRule<MainActivity> mainActivityActivityTestRule = new ActivityTestRule<>(MainActivity.class);
@@ -25,6 +38,6 @@ public class PageAdapterTest {
         assertEquals(mActivity.getString(R.string.TabTitleMostPopular), Objects.requireNonNull(mActivity.pagerAdapter.getPageTitle(1)));
         assertEquals(mActivity.getString(R.string.TabTitleBusiness), Objects.requireNonNull(mActivity.pagerAdapter.getPageTitle(2)));
         assertNull(mActivity.pagerAdapter.getPageTitle(3));
-    }*/
+    }
 
 }
