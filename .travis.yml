@@ -17,9 +17,9 @@ android:
     - platform-tools
     - tools
     - build-tools-29.0.2
-    - android-23
+    - android-24
     - android-29
-    - sys-img-armeabi-v7a-android-23
+    - sys-img-armeabi-v7a-android-24
     - extra-android-m2repository
 
 before_script:
